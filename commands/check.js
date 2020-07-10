@@ -77,13 +77,19 @@ module.exports = {
          * Send stats
          */
         if (check.roles.cache.has(WHAMER)) {
-            message.channel.send(`${check.displayName} has ${data[whammerIndex].wham_tokens} tokens!`)
+            message.channel.send({embed: {
+                description: `${check.displayName} has ${data[whammerIndex].wham_tokens} tokens!`
+            }})
             .then(msg => {msg.delete({timeout: 10000})}).catch();
         } else if (check.roles.cache.has(WHAMED)) {
-            message.channel.send(check.displayName+" is WHAMED!")
+            message.channel.send({embed: {
+                description: `${check.displayName} is WHAMED!`
+            }})
             .then(msg => {msg.delete({timeout: 10000})}).catch();
         } else {
-            message.channel.send(check.displayName+" is not WHAMED nor a WHAMER. Type more in chat to get a wham charge!")
+            message.channel.send({embed: {
+                description: `${check.displayName} is not WHAMED nor a WHAMER. Type more in chat to get a wham charge!`
+            }})
             .then(msg => {msg.delete({timeout: 10000})}).catch();
         }
         message.react('✅');
