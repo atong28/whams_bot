@@ -2,6 +2,10 @@ module.exports = {
 	name: 'stats',
 	description: 'Checks your WHAM! stats.',
 	execute(message, args, Discord, client) {
+
+        /**
+         * Initializes general data variables
+         */
         const data = require("./../counter.json");
         let person = message.member;
         if (args.length === 0) {

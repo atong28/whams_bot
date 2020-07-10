@@ -2,6 +2,10 @@ module.exports = {
 	name: 'leaderboard',
 	description: 'Sends a leaderboard message ordered as specified.',
 	execute(message, args, Discord, client) {
+
+        /**
+         * Initializes general data variables
+         */
         const data = require("./../counter.json");
 
         if (args.length === 0) {

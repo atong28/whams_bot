@@ -68,7 +68,7 @@ client.on('message', message => {
 			return;
 		}
 	}
-	else if (Math.random() < 0.05)
+	else if (Math.random() < 0.03)
 	{
 		try {
 			const command = client.backgrounds.get("throw_charge");

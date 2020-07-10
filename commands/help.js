@@ -5,7 +5,7 @@ module.exports = {
         embedGame = new Discord.MessageEmbed()
             .setTitle('The WHAM! game')
             .setDescription(`The WHAM game involves two roles: WHAMER and WHAMED.
-            The WHAMER can choose to WHAM! anybody that is not corrently a WHAMER or WHAMED.
+            The WHAMER can choose to WHAM! anybody that is not currently WHAMED.
             There is a 40% chance that the WHAMER will successfully WHAM! the target, and a 60% failure rate.
             
             To WHAM! somebody:
@@ -15,10 +15,11 @@ module.exports = {
             The person can be either tagged in the message or match the person's display name.
 
             To obtain the WHAMER role:
-            There is a 5% chance that you receive a WHAMER role per message you send in chat.
+            There is a 1% chance that you receive a WHAM charge per message you send in chat.
+            There is a 5% chance that a message sent will trigger a toss-up event. Reacting to it gives you a WHAM charge.
 
             Upon success:
-            When you succeed in WHAMing someone, the person is now WHAMED and you keep your current WHAM charge.
+            When you succeed in WHAMing someone, the person is now WHAMED, loses all their current WHAM! tokens, and you keep your current WHAM charge.
 
             Upon failure:
             When you fail to WHAM somebody, you lose your WHAM charge and pass it along to the person you
@@ -45,6 +46,18 @@ module.exports = {
             w!stats <Person>
 
             Returns the stats of the specified person.
+
+            Checking the leaderboards
+            
+            w!leaderboard <option>
+
+            Option 1: Successful WHAMs
+            Option 2: Failed WHAMs
+            Option 3: WHAMs Taken
+            Option 4: WHAMs Dodged
+            Option 5: Total WHAM attacking attempts
+            Option 6: Total WHAM! receiving attempts
+
             `);
         embedOther = new Discord.MessageEmbed()
             .setTitle('Miscellaneous')

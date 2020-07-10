@@ -2,6 +2,10 @@ module.exports = {
 	name: 'list',
 	description: 'Lists the people that are either WHAMED, WHAMER, or neither.',
 	execute(message, args, Discord, client) {
+
+        /**
+         * Initializes general data variables
+         */
         const data = require("./../counter.json");
         const guild = message.guild;
         const WHAMER = "730251287219929170";

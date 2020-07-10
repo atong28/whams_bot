@@ -30,11 +30,6 @@ module.exports = {
         else {
 
             /**
-             * Check: the guild member object for the argument
-             */
-            let check = undefined;
-
-            /**
              * Condenses the arguments together into one string (no spaces)
              */
             let argStr = "";
@@ -84,7 +79,7 @@ module.exports = {
         if (check.roles.cache.has(WHAMER)) {
             message.channel.send(`${check.displayName} has ${data[whammerIndex].wham_tokens} tokens!`)
             .then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
-        } else if (message.member.roles.cache.has(WHAMED)) {
+        } else if (check.roles.cache.has(WHAMED)) {
             message.channel.send(check.displayName+" is WHAMED!")
             .then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
         } else {

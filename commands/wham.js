@@ -1,7 +1,11 @@
 module.exports = {
 	name: 'wham',
-	description: 'Reset the wham game.',
+	description: 'Attempt to WHAM somebody.',
 	execute(message, args, Discord, client) {
+
+        /**
+         * Initializes general data variables
+         */
 		const { ct, ct2 } = require('./../customtext.json')
 		const customtext = Math.floor(Math.random()*ct.length);
 	    const customtext2 = Math.floor(Math.random()*ct2.length);
@@ -12,6 +16,9 @@ module.exports = {
         const data = require("./../counter.json");
         const fs = require("fs"); 
 
+        /**
+         * Combine args (no spaces)
+         */
         let whamed = undefined;
 
             let argStr = "";
@@ -21,6 +28,9 @@ module.exports = {
             console.log(argStr);
 
 
+        /**
+         * Find member mentioned
+         */
         if (message.mentions.members.size < 1)
         {
             whamed = message.guild.members.cache.find(m => (argStr.toLowerCase() == m.displayName.toLowerCase().replace(/\s+/g, '')));
@@ -37,6 +47,8 @@ module.exports = {
         {
             whamed = message.mentions.members.first();
         }
+        
+        
         if (message.member.roles.cache.find(r => r.id == WHAMER))
         {
             if (whamed.user.bot)
@@ -44,6 +56,14 @@ module.exports = {
                 message.channel.send({embed: {
                     color:16711680,
                     description: `You cannot wham a bot!`
+                }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
+                message.react("🚫");
+                return;
+            }
+            if (whamed.id == message.member.id) {
+                message.channel.send({embed: {
+                    color:16711680,
+                    description: `You cannot wham yourself!`
                 }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
                 message.react("🚫");
                 return;
@@ -57,7 +77,7 @@ module.exports = {
                 message.react("🚫");
                 return;
             }
-            else if (whamed.roles.cache.find(r => r.id == WHAMER))
+           /* else if (whamed.roles.cache.find(r => r.id == WHAMER))
             {
                 message.channel.send({embed: {
                     color:16711680,
@@ -65,7 +85,7 @@ module.exports = {
                 }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
                 message.react("🚫");
                 return;
-            }
+            }*/
 
             console.log(data);
 
@@ -131,22 +151,24 @@ module.exports = {
                 data[whammerIndex].failed_whams += 1;
                 data[whammedIndex].dodged_whams += 1;
                 data[whammerIndex].wham_tokens -= 1;
+                data[whammedIndex].wham_tokens += 1;
                 if (data[whammerIndex].wham_tokens == 0)
                 {
                     message.member.roles.remove(WHAMER);
                 }
+                whamed.roles.add(WHAMER);
             }
             else
             {
                 message.channel.send({embed: {
                     color: 4474111,
                     description: `${whamed}, you got WHAMED by ${message.member} - ${ct2[customtext2]}`
-                }}) /* NO DELETION */
+                }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
 
                 data[whammerIndex].successful_whams += 1;
                 data[whammedIndex].hit_whams += 1;
                 data[whammedIndex].wham_tokens = 0;
-
+                whamed.roles.remove(WHAMER);
                 whamed.roles.add(WHAMED);
             }
 

@@ -5,6 +5,7 @@ module.exports = {
         const WHAMED = "730251299140009988";
 		const WHAMER = "730251287219929170";
 		const data = require("./counter.json");
+		const fs = require("fs");
 
 		if (message.member.roles.cache.get(WHAMED)) {
 			return;
@@ -24,7 +25,7 @@ module.exports = {
 		if (whammerIndex == undefined)
 		{
 			let newWhammed = {
-				id:whamed.id,
+				id:message.member.id,
 				successful_whams:0,
 				failed_whams:0,
 				dodged_whams:0,
@@ -32,6 +33,7 @@ module.exports = {
 				wham_tokens:0
 			}
 			data.push(newWhammed);
+			whammerIndex = data.length-1;
 		}
 		data[whammerIndex].wham_tokens += 1;
 		message.member.roles.add(WHAMER);
