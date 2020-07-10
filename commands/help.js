@@ -55,9 +55,9 @@ module.exports = {
             Option 2: Failed WHAMs
             Option 3: WHAMs Taken
             Option 4: WHAMs Dodged
-            Option 5: Total WHAM attacking attempts
+            Option 5: Total WHAM! attacking attempts
             Option 6: Total WHAM! receiving attempts
-
+            Option 7: Total WHAM! tokens
             `);
         embedOther = new Discord.MessageEmbed()
             .setTitle('Miscellaneous')
@@ -67,8 +67,8 @@ module.exports = {
             BEING FIXED: Telling somebody "you are blocked <tag>" will cause the bot to send a private DM to them telling them that they are indeed blocked.
             
             Rishimute: 10% chance for RC (Retro-Whams) to be censored.`);
-        message.channel.send(embedGame).then(msg => {msg.delete({timeout: 60000})}).catch( console.log("hehe"));
-        message.channel.send(embedOther).then(msg => {msg.delete({timeout: 60000})}).catch( console.log("hehe"));
+        message.channel.send(embedGame).then(msg => {msg.delete({timeout: 60000})}).catch();
+        message.channel.send(embedOther).then(msg => {msg.delete({timeout: 60000})}).catch();
         message.react("✅");
     } 
 }

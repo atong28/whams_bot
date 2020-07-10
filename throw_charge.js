@@ -21,8 +21,6 @@ module.exports = {
             const collector = msg.createReactionCollector(filter, { time: 20000 });
             
             collector.on('collect', (reaction, user) => {
-                console.log(`Collected ${reaction.emoji.name} from ${user.tag}`);
-                console.log("User found pre-screen: "+user.id)
                 if (!user.bot) {
                     if (reaction.emoji.name == '🎁') {
                         let whammerIndex = undefined;
@@ -50,74 +48,22 @@ module.exports = {
                         {
                             data[whammerIndex].wham_tokens += 1;
                         }
-    
-                        //user isn't even found in console, does it properly collect 1 or more?
-                        console.log("User found: "+user.id);
                         let guildMember = message.guild.members.cache.find(mem => mem.id == user.id);
                         if (guildMember.roles.cache.has(WHAMED)) return;
                         guildMember.roles.add(WHAMER);
     
                         message.channel.send({embed: {
                         description: `You opened ${draven_spelling}'s gift, ${guildMember.displayName}! !wham another user to use his gift.`
-                        }}).then(msg => {collector.stop();}).catch( console.log("hehe"));
+                        }}).then(msg => {collector.stop();}).catch();
 
                         fs.writeFile("./counter.json", JSON.stringify(data), err => { 
                             // Checking for errors 
                             if (err) throw err;  
-                           
-                            console.log("Emoji detected and written"); // Success 
                         });
                     }
                 }
             });
             msg.delete({timeout: 2000});
-
-
-
-
-            /*collector.on('collect', (reaction, user) => {
-                console.log("User found pre-screen: "+user.id)
-                if (!user.bot) {
-                    if (reaction.emoji.name == '🎁') {
-                        let whammerIndex = undefined;
-                        for (i = 0; i < data.length; i++) { 
-                            
-                            if (data[i].id == user.id) 
-                            {
-                                whammerIndex = i;
-                                break;
-                            }
-                        }
-                        if (whammerIndex == undefined)
-                        {
-                            let newWhammed = {
-                                id:message.member.id,
-                                successful_whams:0,
-                                failed_whams:0,
-                                dodged_whams:0,
-                                hit_whams:0,
-                                wham_tokens:1
-                            }
-                            data.push(newWhammed);
-                        }
-                        else
-                        {
-                            data[whammerIndex].wham_tokens += 1;
-                        }
-    
-                        //user isn't even found in console, does it properly collect 1 or more?
-                        console.log("User found: "+user.id);
-                        let guildMember = message.guild.members.cache.find(mem => mem.id == user.id);
-                        if (guildMember.roles.cache.has(WHAMED)) return;
-                        guildMember.roles.add(WHAMER);
-    
-                        message.channel.send({embed: {
-                        description: `You opened ${draven_spelling}'s gift, ${guildMember.displayName}! !wham another user to use his gift.`
-                        }}).then(msg => {collector.stop();}).catch( console.log("hehe"));
-                    }
-                }
-                
-            })*/
         });
         
     }

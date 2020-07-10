@@ -10,17 +10,24 @@ module.exports = {
 		const WHAMER = "730251287219929170";
 		const data = require("./../counter.json");
 		const fs = require("fs"); 
+
+		/**
+		 * Allows access to Whams and relay400 only.
+		 */
 		if (message.author.id == "321108985346261002" || message.author.id == "214796172315983872")
 		{
+			/**
+			 * Searching for the author's stats in json file
+			 */
 			let whammerIndex = undefined;
 			for (i = 0; i < data.length; i++) {
-				console.log("Array: "+data[i].id);
-				console.log("Discord: "+message.member.id)
-				console.log("Check if equal: "+data[i].id == message.member.id)
 				if (data[i].id == message.member.id) {
 					whammerIndex = i;
 				}
 			}
+			/**
+			 * If user not in json file, push a new blank profile
+			 */
 			if (whammerIndex == undefined)
 			{
 				let newWhammed = {
@@ -31,36 +38,25 @@ module.exports = {
 					hit_whams:0,
 					wham_tokens:0
 				}
-				data.push(newWhammed);
-				for (i = 0; i < data.length; i++) {
-					console.log("Array: "+data[i].id);
-					console.log("Discord: "+message.member.id)
-					console.log("Check if equal: "+data[i].id == message.member.id)
-					if (data[i].id == message.member.id) {
-						whammerIndex = i;
-					}
-				}
+				data.push(newWhammed); // push blank profile and find it again
+				whammerIndex = data.length-1;
 			}
 
 			if (message.member.roles.cache.has(WHAMER) || message.member.roles.cache.has(WHAMED)) {
-
+				// do nothing
 			} else {
-				message.member.roles.add(WHAMER);
+				message.member.roles.add(WHAMER); // give WHAMER role, since token count will necessarily
+				                                  // be positive
 			}
-			
-			console.log(whammerIndex);
-			console.log(data[whammerIndex]);
-			data[whammerIndex].wham_tokens += 1;
-			console.log(data[whammerIndex]);
-			message.react("✅"); // passing through here
+			data[whammerIndex].wham_tokens += 1; // give the user a token
+
+			message.react("✅");
 			fs.writeFile("../counter.json", JSON.stringify(data), err => { 
 				// Checking for errors 
 				if (err) throw err;  
-			
-				console.log("Done writing"); // Success 
 			});
 		}
-		else {
+		else { // If you aren't Whams or relay400
 			message.react("🚫");
 		}
 	}

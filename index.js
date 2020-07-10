@@ -68,7 +68,7 @@ client.on('message', message => {
 			return;
 		}
 	}
-	else if (Math.random() < 0.03)
+	else if (Math.random() < 0.02)
 	{
 		try {
 			const command = client.backgrounds.get("throw_charge");
@@ -125,13 +125,13 @@ client.on('message', message => {
 	const command = client.commands.get(commandName);
 
 	try {
-		message.delete({timeout: 10000}).catch( console.log("hehe"));
+		message.delete({timeout: 10000}).catch();
 		command.execute(message, args, Discord, client);
 		
 		
 	} catch (error) {
 		console.error(error);
-		message.reply('there was an error trying to execute that command!').then(msg => msg.delete({timeout: 10000}).catch(console.log("hehe")));
+		message.reply('there was an error trying to execute that command!').then(msg => msg.delete({timeout: 10000}).catch());
 	}
 	// other commands...
 });

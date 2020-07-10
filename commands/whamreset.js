@@ -15,7 +15,9 @@ module.exports = {
             return;
         }
 
-
+        /**
+         * Remove all roles
+         */
         message.guild.roles.cache.find(r => r.id === WHAMED).members.forEach(mem => {
             mem.roles.remove(WHAMED);
         })
@@ -23,16 +25,20 @@ module.exports = {
             mem.roles.remove(WHAMER);
         })
 
+        /**
+         * Reset all wham tokens
+         */
         for (i = 0; i < data.length; i++)
         {
             data[i].wham_tokens = 0;
         }
+
+        /**
+         * Update data files
+         */
         fs.writeFile("counter.json", JSON.stringify(data), err => { 
-        
             // Checking for errors 
             if (err) throw err;  
-          
-            console.log("Done writing"); // Success 
         });
         message.react("✅");
     }

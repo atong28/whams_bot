@@ -25,7 +25,7 @@ module.exports = {
             if (WHAMED_MEMBERS_ARRAY.length === 0) {
                 message.channel.send({embed: {
                     description: `Error: there are no people whamed.`
-                }}).then(msg => {msg.delete({timeout: 20000})}).catch( console.log("hehe"));
+                }}).then(msg => {msg.delete({timeout: 20000})}).catch();
                 return;
             }
             for (i = 0; i < WHAMED_MEMBERS_ARRAY.length-1; i++) {
@@ -38,7 +38,7 @@ module.exports = {
             if (WHAMER_MEMBERS_ARRAY.length === 0) {
                 message.channel.send({embed: {
                     description: `Error: there are no whamers.`
-                }}).then(msg => {msg.delete({timeout: 20000})}).catch( console.log("hehe")); 
+                }}).then(msg => {msg.delete({timeout: 20000})}).catch(); 
                 return;
             }
             for (i = 0; i < WHAMER_MEMBERS_ARRAY.length-1; i++) {
@@ -58,10 +58,12 @@ module.exports = {
             }
         } else {
             message.react("🚫");
-            message.reply("I did not understand your arguments. Please use: w!list [WHAMED/WHAMER/NEITHER]").then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));;
+            message.reply("I did not understand your arguments. Please use: w!list [WHAMED/WHAMER/NEITHER]").then(msg => {msg.delete({timeout: 10000})}).catch();
             return;
         }
-        message.reply(str).then(msg => {msg.delete({timeout: 20000})}).catch( console.log("hehe"));
+        message.channel.send({embed: {
+            description: `${str}`
+        }}).then(msg => {msg.delete({timeout: 20000})}).catch(); 
         message.react('✅');
     }
 }

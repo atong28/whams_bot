@@ -25,7 +25,6 @@ module.exports = {
             for (i = 0; i < args.length; i++) {
                 argStr += args[i];
             }
-            console.log(argStr);
 
 
         /**
@@ -48,47 +47,52 @@ module.exports = {
             whamed = message.mentions.members.first();
         }
         
-        
+        /**
+         * Execute WHAM attempt if person has tokens
+         */
         if (message.member.roles.cache.find(r => r.id == WHAMER))
         {
+            /**
+             * Deny whamming bots
+             */
             if (whamed.user.bot)
             {
                 message.channel.send({embed: {
                     color:16711680,
                     description: `You cannot wham a bot!`
-                }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
+                }}).then(msg => {msg.delete({timeout: 10000})}).catch();
                 message.react("🚫");
                 return;
             }
+
+            /**
+             * Deny whamming themselves
+             */
             if (whamed.id == message.member.id) {
                 message.channel.send({embed: {
                     color:16711680,
                     description: `You cannot wham yourself!`
-                }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
+                }}).then(msg => {msg.delete({timeout: 10000})}).catch();
                 message.react("🚫");
                 return;
             }
+
+            /**
+             * Deny whamming people already WHAMED
+             */
             if (whamed.roles.cache.find(r => r.id == WHAMED))
             {
                 message.channel.send({embed: {
                     color: 16711680,
                     description: `They've already been WHAMED! Find someone else to cyberbully.`
-                }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
+                }}).then(msg => {msg.delete({timeout: 10000})}).catch();
                 message.react("🚫");
                 return;
             }
-           /* else if (whamed.roles.cache.find(r => r.id == WHAMER))
-            {
-                message.channel.send({embed: {
-                    color:16711680,
-                    description: `This person currently has Dretfan's protection. Find someone else to cyberbully.`
-                }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
-                message.react("🚫");
-                return;
-            }*/
 
-            console.log(data);
-
+            /**
+             * Find data in JSON + indices relevant
+             */
             let whammerIndex = undefined;
             let whammedIndex = undefined;
 
@@ -100,9 +104,9 @@ module.exports = {
                 }
             }
 
-            console.log("WhammerIndex: "+whammerIndex);
-            console.log("WhammedIndex: "+whammedIndex);
-
+            /**
+             * If no profile exists, create new
+             */
             if (whammerIndex == undefined || whammerIndex == null) {
                 let newWhammer = {
                     id:message.member.id,
@@ -112,8 +116,8 @@ module.exports = {
                     hit_whams:0,
                     wham_tokens:0
                 }
-                console.log("Early: "+newWhammer.id === message.member.id);
                 data.push(newWhammer);
+                whammerIndex = data.length-1;
             }
 
             if (whammedIndex == undefined || whammerIndex == null) {
@@ -126,27 +130,18 @@ module.exports = {
                     wham_tokens:0
                 }
                 data.push(newWhammed);
+                whammedIndexIndex = data.length-1;
             }
 
-            for (i = 0; i < data.length; i++) {
-                console.log("Array: "+data[i].id);
-                console.log("Discord: "+message.member.id)
-                console.log("Check if equal: "+data[i].id === message.member.id)
-                if (data[i].id == message.member.id) {
-                    whammerIndex = i;
-                } else if (data[i].id == whamed.id) {
-                    whammedIndex = i;
-                }
-            }
-
-            console.log(data);
-
+            /**
+             * 60% chance: avoid WHAM
+             */
             if (Math.random() > 0.40)
             {
                 message.channel.send({embed: {
                     color: 6160243,
                     description: `${whamed} avoided getting a WHAM from ${message.member}.`
-                }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
+                }}).then(msg => {msg.delete({timeout: 10000})}).catch();
 
                 data[whammerIndex].failed_whams += 1;
                 data[whammedIndex].dodged_whams += 1;
@@ -158,12 +153,16 @@ module.exports = {
                 }
                 whamed.roles.add(WHAMER);
             }
+
+            /**
+             * 40% chance: get WHAMed
+             */
             else
             {
                 message.channel.send({embed: {
                     color: 4474111,
                     description: `${whamed}, you got WHAMED by ${message.member} - ${ct2[customtext2]}`
-                }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
+                }}).then(msg => {msg.delete({timeout: 10000})}).catch();
 
                 data[whammerIndex].successful_whams += 1;
                 data[whammedIndex].hit_whams += 1;
@@ -172,23 +171,27 @@ module.exports = {
                 whamed.roles.add(WHAMED);
             }
 
+            /**
+             * Write to file, update data
+             */
             fs.writeFile("counter.json", JSON.stringify(data), err => { 
-     
                 // Checking for errors 
                 if (err) throw err;  
-               
-                console.log("Done writing"); // Success 
             }); 
 
 
             message.react("✅");
         }
+
+        /**
+         * When member has no charges and attempts to wham
+         */
         else
         {
             message.channel.send({embed: {
                 color: 16711680,
                 description: `Dortven hasn't blessed you with the power to WHAM someone yet. Try again later.`
-            }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
+            }}).then(msg => {msg.delete({timeout: 10000})}).catch();
             message.react("🚫");
         }
 

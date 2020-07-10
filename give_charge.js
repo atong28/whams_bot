@@ -15,9 +15,6 @@ module.exports = {
 
 		let whammerIndex = undefined;
 		for (i = 0; i < data.length; i++) {
-			console.log("Array: "+data[i].id);
-			console.log("Discord: "+message.member.id)
-			console.log("Check if equal: "+data[i].id === message.member.id)
 			if (data[i].id == message.member.id) {
 				whammerIndex = i;
 			}
@@ -39,15 +36,12 @@ module.exports = {
 		message.member.roles.add(WHAMER);
 
 		fs.writeFile("counter.json", JSON.stringify(data), err => { 
-     
 			// Checking for errors 
 			if (err) throw err;  
-		   
-			console.log("Done writing"); // Success 
 		  });
 		
 		message.channel.send({embed: {
 			description: `${draven_spelling} has blessed you, ${message.member.displayName}! !wham another user to use his blessing.`
-		}}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
+		}}).then(msg => {msg.delete({timeout: 10000})}).catch();
     }
 }
