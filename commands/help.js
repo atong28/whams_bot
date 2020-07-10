@@ -3,7 +3,7 @@ module.exports = {
 	description: 'Gives a help message.',
 	execute(message, args, Discord, client) {
         embedGame = new Discord.MessageEmbed()
-            .setTitle('The WHAM! game')
+            .setTitle('The WHAM! Game')
             .setDescription(`The WHAM game involves two roles: WHAMER and WHAMED.
             The WHAMER can choose to WHAM! anybody that is not currently WHAMED.
             There is a 40% chance that the WHAMER will successfully WHAM! the target, and a 60% failure rate.
@@ -37,7 +37,10 @@ module.exports = {
 
             Checking someone's status
 
-            w!check <Person>
+            `);
+        embedGame2 = new Discord.MessageEmbed()
+            .setTitle('The WHAM! Game pt. 2')
+            .setDescription(`w!check <Person>
 
             Returns whether a specified person is WHAMED, a WHAMER, or NEITHER. Leaving out the Person argument checks yourself.
 
@@ -68,6 +71,7 @@ module.exports = {
             
             Rishimute: 10% chance for RC (Retro-Whams) to be censored.`);
         message.channel.send(embedGame).then(msg => {msg.delete({timeout: 60000})}).catch();
+        message.channel.send(embedGame2).then(msg => {msg.delete({timeout: 60000})}).catch();
         message.channel.send(embedOther).then(msg => {msg.delete({timeout: 60000})}).catch();
         message.react("✅");
     } 
