@@ -67,7 +67,7 @@ module.exports = {
             .setDescription(`Other features of the Whams Bot:
             There is a 0.5% chance that a message not sent by a bot will trigger a custom copypasta text in chat.
             
-            BEING FIXED: Telling somebody "you are blocked <tag>" will cause the bot to send a private DM to them telling them that they are indeed blocked.
+            Telling somebody "you are blocked <tag>" will cause the bot to send a private DM to them telling them that they are indeed blocked.
             
             Rishimute: 10% chance for RC (Retro-Whams) to be censored.`);
         message.channel.send(embedGame).then(msg => {msg.delete({timeout: 60000})}).catch();

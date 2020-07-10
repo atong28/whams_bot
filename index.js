@@ -107,6 +107,7 @@ client.on('message', message => {
 				color:16711680,
 				description: `Oops! Something went wrong while lord Droben attempted to relay the message that you were blocked. Please notify Whams.`
 			}})
+			console.log(error);
 			message.react("⚠️");
 			return;
 		}
