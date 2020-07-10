@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'leaderboard',
-	description: 'Sends a leaderboard message ordered as specified.',
+    description: 'Sends a leaderboard message ordered as specified.',
+    aliases: ['lb'],
 	execute(message, args, Discord, client) {
 
         /**
