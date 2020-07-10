@@ -8,6 +8,12 @@ module.exports = {
 		const fs = require("fs");
 
 		if (message.member.roles.cache.get(WHAMED)) {
+			if (guildMember.roles.cache.has(WHAMED)) {
+				message.channel.send({embed: {
+					description: `You opened ${draven_spelling}'s gift, ${guildMember.displayName}! You have been un-whamed.`
+					}}).then(msg => {collector.stop();}).catch();
+				guildMember.roles.remove(WHAMED);
+			};
 			return;
         }
         const {ct, ct2, ct3} = require('./customtext.json')

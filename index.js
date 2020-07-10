@@ -76,7 +76,7 @@ client.on('message', message => {
 		} catch (error) {
 			message.channel.send({embed: {
 				color:16711680,
-				description: `Oops! Something wentw rong while lord Droben attempted to give a token. Please notify Whams.`
+				description: `Oops! Something went wrong while lord Droben attempted to give a token. Please notify Whams.`
 			}})
 			console.log(error);
 			message.react("⚠️");
@@ -121,8 +121,10 @@ client.on('message', message => {
 	const commandName = args.shift().toLowerCase();
 
 
-	if (!client.commands.has(commandName)) return;
-
+	if (!client.commands.has(commandName)) {
+		message.delete({timeout: 10000}).catch();
+		return;
+	}
 	const command = client.commands.get(commandName);
 
 	try {

@@ -1,3 +1,5 @@
+const { exit } = require('process');
+
 module.exports = {
 	name: 'throw_charge',
 	description: 'Throws a charge up. First to catch it (via reacting) gets a wham charge. >> CURRENTLY HAS SAME FUNCTION AS GIVE_CHARGE <<',
@@ -49,7 +51,13 @@ module.exports = {
                             data[whammerIndex].wham_tokens += 1;
                         }
                         let guildMember = message.guild.members.cache.find(mem => mem.id == user.id);
-                        if (guildMember.roles.cache.has(WHAMED)) return;
+                        if (guildMember.roles.cache.has(WHAMED)) {
+                            message.channel.send({embed: {
+                                description: `You opened ${draven_spelling}'s gift, ${guildMember.displayName}! You have been un-whamed.`
+                                }}).then(msg => {collector.stop();}).catch();
+                            guildMember.roles.remove(WHAMED);
+                            return;
+                        };
                         guildMember.roles.add(WHAMER);
     
                         message.channel.send({embed: {

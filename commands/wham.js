@@ -130,7 +130,7 @@ module.exports = {
                     wham_tokens:0
                 }
                 data.push(newWhammed);
-                whammedIndexIndex = data.length-1;
+                whammedIndex = data.length-1;
             }
 
             /**
