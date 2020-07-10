@@ -7,13 +7,13 @@ module.exports = {
             const WHAMED = "730251299140009988";
             if (message.member.roles.cache.has(WHAMER)) {
                 message.reply("you are a WHAMER!")
-                    .then(msg => {msg.delete(10000)}).catch( console.log("hehe"));
+                    .then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
             } else if (message.member.roles.cache.has(WHAMED)) {
                 message.reply("you are WHAMED!")
-                    .then(msg => {msg.delete(10000)}).catch( console.log("hehe"));
+                    .then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
             } else {
                 message.reply("you are not WHAMED nor a WHAMER. Type more in chat to get a wham charge!")
-                    .then(msg => {msg.delete(10000)}).catch( console.log("hehe"));
+                    .then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
             }
             message.react('✅');
         }
@@ -50,13 +50,13 @@ module.exports = {
             const WHAMED = "730251299140009988";
             if (check.roles.cache.has(WHAMER)) {
                 message.channel.send(check.displayName+" is a WHAMER!")
-                .then(msg => {msg.delete(10000)}).catch( console.log("hehe"));
+                .then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
             } else if (message.member.roles.cache.has(WHAMED)) {
                 message.channel.send(check.displayName+" is WHAMED!")
-                .then(msg => {msg.delete(10000)}).catch( console.log("hehe"));
+                .then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
             } else {
                 message.channel.send(check.displayName+"is not WHAMED nor a WHAMER. Type more in chat to get a wham charge!")
-                .then(msg => {msg.delete(10000)}).catch( console.log("hehe"));
+                .then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
             }
             message.react('✅');
         }
