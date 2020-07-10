@@ -110,7 +110,10 @@ client.on('message', message => {
 	const command = client.commands.get(commandName);
 
 	try {
+		message.delete({timeout: 10000}).catch( console.log("hehe"));
 		command.execute(message, args, Discord, client);
+		
+		
 	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');

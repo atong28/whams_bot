@@ -59,7 +59,7 @@ module.exports = {
             You failed to WHAM! people 0 times.
             You dodged a WHAM! 0 times.
             You were hit by a WHAM! 0 times.`
-            }});
+            }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));;
         } else {
             console.log(`Stats were logged successfully.`);
             message.channel.send({embed: {
@@ -69,7 +69,7 @@ module.exports = {
             You failed to WHAM! people ${data[index].failed_whams} times.
             You dodged a WHAM! ${data[index].dodged_whams} times.
             You were hit by a WHAM! ${data[index].hit_whams} times.`
-            }});
+            }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));;
         }
         message.react('✅');
         

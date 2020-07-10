@@ -54,8 +54,8 @@ module.exports = {
             BEING FIXED: Telling somebody "you are blocked <tag>" will cause the bot to send a private DM to them telling them that they are indeed blocked.
             
             Rishimute: 10% chance for RC (Retro-Whams) to be censored.`);
-        message.channel.send(embedGame);
-        message.channel.send(embedOther);
+        message.channel.send(embedGame).then(msg => {msg.delete({timeout: 60000})}).catch( console.log("hehe"));
+        message.channel.send(embedOther).then(msg => {msg.delete({timeout: 60000})}).catch( console.log("hehe"));
         message.react("✅");
-    }
+    } 
 }

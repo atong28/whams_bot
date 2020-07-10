@@ -17,6 +17,6 @@ module.exports = {
 		message.member.roles.add(WHAMER);
 		message.channel.send({embed: {
 			description: `${draven_spelling} has blessed you, ${message.member.displayName}! !wham another user to use his blessing.`
-		}});
+		}}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
     }
 }

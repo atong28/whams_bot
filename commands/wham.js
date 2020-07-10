@@ -44,7 +44,7 @@ module.exports = {
                 message.channel.send({embed: {
                     color:16711680,
                     description: `You cannot wham a bot!`
-                }})
+                }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
                 message.react("🚫");
                 return;
             }
@@ -53,7 +53,7 @@ module.exports = {
                 message.channel.send({embed: {
                     color: 16711680,
                     description: `They've already been WHAMED! Find someone else to cyberbully.`
-                }})
+                }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
                 message.react("🚫");
                 return;
             }
@@ -62,7 +62,7 @@ module.exports = {
                 message.channel.send({embed: {
                     color:16711680,
                     description: `This person currently has Dretfan's protection. Find someone else to cyberbully.`
-                }})
+                }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
                 message.react("🚫");
                 return;
             }
@@ -124,7 +124,7 @@ module.exports = {
                 message.channel.send({embed: {
                     color: 6160243,
                     description: `${whamed} avoided getting a WHAM from ${message.member}.`
-                }})
+                }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
 
                 data[whammerIndex].failed_whams += 1;
                 data[whammedIndex].dodged_whams += 1;
@@ -136,7 +136,7 @@ module.exports = {
                 message.channel.send({embed: {
                     color: 4474111,
                     description: `${whamed}, you got WHAMED by ${message.member} - ${ct2[customtext2]}`
-                }})
+                }}) /* NO DELETION */
 
                 data[whammerIndex].successful_whams += 1;
                 data[whammedIndex].hit_whams += 1;
@@ -160,7 +160,7 @@ module.exports = {
             message.channel.send({embed: {
                 color: 16711680,
                 description: `Dortven hasn't blessed you with the power to WHAM someone yet. Try again later.`
-            }})
+            }}).then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));
             message.react("🚫");
         }
 

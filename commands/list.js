@@ -40,10 +40,10 @@ module.exports = {
             }
         } else {
             message.react("🚫");
-            message.reply("I did not understand your arguments. Please use: w!list [WHAMED/WHAMER/NEITHER]");
+            message.reply("I did not understand your arguments. Please use: w!list [WHAMED/WHAMER/NEITHER]").then(msg => {msg.delete({timeout: 10000})}).catch( console.log("hehe"));;
             return;
         }
-        message.channel.send(str);
+        message.reply(str).then(msg => {msg.delete({timeout: 20000})}).catch( console.log("hehe"));;
         message.react('✅');
     }
 }
