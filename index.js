@@ -49,11 +49,11 @@ client.on('message', message => {
 				description: `Oops! Something went wrong while lord Droben attempted to give you information. Please notify Whams.`
 			}})
 			console.log(error);
-			message.react("🚫");
+			message.react("⚠️");
 			return;
 		}
 	}
-	if (Math.random() < 0.05)
+	if (Math.random() < 0.01)
 	{
 		try {
 			const command = client.backgrounds.get("give_charge");
@@ -64,7 +64,22 @@ client.on('message', message => {
 				description: `Oops! Something went wrong while lord Droben attempted to bless you. Please notify Whams.`
 			}})
 			console.log(error);
-			message.react("🚫");
+			message.react("⚠️");
+			return;
+		}
+	}
+	else if (Math.random() < 0.05)
+	{
+		try {
+			const command = client.backgrounds.get("throw_charge");
+			command.execute(message, Discord, client);
+		} catch (error) {
+			message.channel.send({embed: {
+				color:16711680,
+				description: `Oops! Something wentw rong while lord Droben attempted to give a token. Please notify Whams.`
+			}})
+			console.log(error);
+			message.react("⚠️");
 			return;
 		}
 	}
@@ -78,7 +93,7 @@ client.on('message', message => {
 				color:16711680,
 				description: `Oops! Something went wrong while lord Droben attempted to destroy RC's mental. Please notify Whams.`
 			}})
-			message.react("🚫");
+			message.react("⚠️");
 			return;
 		}
 	}
@@ -92,7 +107,7 @@ client.on('message', message => {
 				color:16711680,
 				description: `Oops! Something went wrong while lord Droben attempted to relay the message that you were blocked. Please notify Whams.`
 			}})
-			message.react("🚫");
+			message.react("⚠️");
 			return;
 		}
 		
@@ -116,7 +131,7 @@ client.on('message', message => {
 		
 	} catch (error) {
 		console.error(error);
-		message.reply('there was an error trying to execute that command!');
+		message.reply('there was an error trying to execute that command!').then(msg => msg.delete({timeout: 10000}).catch(console.log("hehe")));
 	}
 	// other commands...
 });

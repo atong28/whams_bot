@@ -89,7 +89,8 @@ module.exports = {
                     successful_whams:0,
                     failed_whams:0,
                     dodged_whams:0,
-                    hit_whams:0
+                    hit_whams:0,
+                    wham_tokens:0
                 }
                 console.log("Early: "+newWhammer.id === message.member.id);
                 data.push(newWhammer);
@@ -101,7 +102,8 @@ module.exports = {
                     successful_whams:0,
                     failed_whams:0,
                     dodged_whams:0,
-                    hit_whams:0
+                    hit_whams:0,
+                    wham_tokens:0
                 }
                 data.push(newWhammed);
             }
@@ -128,8 +130,11 @@ module.exports = {
 
                 data[whammerIndex].failed_whams += 1;
                 data[whammedIndex].dodged_whams += 1;
-                message.member.roles.remove(WHAMER);
-                whamed.roles.add(WHAMER);
+                data[whammerIndex].wham_tokens -= 1;
+                if (data[whammerIndex].wham_tokens == 0)
+                {
+                    message.member.roles.remove(WHAMER);
+                }
             }
             else
             {
@@ -140,6 +145,7 @@ module.exports = {
 
                 data[whammerIndex].successful_whams += 1;
                 data[whammedIndex].hit_whams += 1;
+                data[whammedIndex].wham_tokens = 0;
 
                 whamed.roles.add(WHAMED);
             }
