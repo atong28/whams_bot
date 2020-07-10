@@ -49,6 +49,7 @@ module.exports = {
             str += "neither: ";
             const MEMBERS_ARRAY = guild.members.cache.array();
             for (i = 0; i < MEMBERS_ARRAY.length-1; i++) {
+                if (MEMBERS_ARRAY[i].user.bot) continue;
                 if (!MEMBERS_ARRAY[i].roles.cache.has(WHAMER) && !MEMBERS_ARRAY[i].roles.cache.has(WHAMED)) {
                     str += MEMBERS_ARRAY[i].displayName+", ";
                 }
