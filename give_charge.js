@@ -6,18 +6,18 @@ module.exports = {
 		const WHAMER = "730251287219929170";
 		const data = require("./counter.json");
 		const fs = require("fs");
-
-		if (message.member.roles.cache.get(WHAMED)) {
-			if (guildMember.roles.cache.has(WHAMED)) {
-				message.channel.send({embed: {
-					description: `You opened ${draven_spelling}'s gift, ${guildMember.displayName}! You have been un-whamed.`
-					}}).then(msg => {collector.stop();}).catch();
-				guildMember.roles.remove(WHAMED);
-			};
-			return;
-        }
-        const {ct, ct2, ct3} = require('./customtext.json')
+		const {ct, ct2, ct3} = require('./customtext.json')
         const draven_spelling = ct3[Math.floor(Math.random()*ct3.length)];
+
+		if (message.member.roles.cache.has(WHAMED)) {
+			message.channel.send({embed: {
+				description: `You opened ${draven_spelling}'s gift, ${message.member.displayName}! You have been un-whamed.`
+				}}).then(msg => {msg.delete({timeout: 10000})}).catch();
+			message.member.roles.remove(WHAMED);
+			return;
+		}
+		
+        
 
 		let whammerIndex = undefined;
 		for (i = 0; i < data.length; i++) {

@@ -54,7 +54,7 @@ module.exports = {
                         if (guildMember.roles.cache.has(WHAMED)) {
                             message.channel.send({embed: {
                                 description: `You opened ${draven_spelling}'s gift, ${guildMember.displayName}! You have been un-whamed.`
-                                }}).then(msg => {collector.stop();}).catch();
+                                }}).then(msg2 => {collector.stop(); msg2.delete({timeout: 10000})}).catch();
                             guildMember.roles.remove(WHAMED);
                             return;
                         };
@@ -62,7 +62,7 @@ module.exports = {
     
                         message.channel.send({embed: {
                         description: `You opened ${draven_spelling}'s gift, ${guildMember.displayName}! !wham another user to use his gift.`
-                        }}).then(msg => {collector.stop();}).catch();
+                        }}).then(msg2 => {collector.stop(); msg2.delete({timeout:10000})}).catch();
 
                         fs.writeFile("./counter.json", JSON.stringify(data), err => { 
                             // Checking for errors 

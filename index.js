@@ -47,7 +47,7 @@ client.on('message', message => {
 			message.channel.send({embed: {
 				color:16711680,
 				description: `Oops! Something went wrong while lord Droben attempted to give you information. Please notify Whams.`
-			}})
+			}}).then(msg => msg.delete({timeout: 10000})).catch();
 			console.log(error);
 			message.react("⚠️");
 			return;
@@ -62,7 +62,7 @@ client.on('message', message => {
 			message.channel.send({embed: {
 				color:16711680,
 				description: `Oops! Something went wrong while lord Droben attempted to bless you. Please notify Whams.`
-			}})
+			}}).then(msg => msg.delete({timeout: 10000})).catch();
 			console.log(error);
 			message.react("⚠️");
 			return;
@@ -77,7 +77,7 @@ client.on('message', message => {
 			message.channel.send({embed: {
 				color:16711680,
 				description: `Oops! Something went wrong while lord Droben attempted to give a token. Please notify Whams.`
-			}})
+			}}).then(msg => msg.delete({timeout: 10000})).catch();
 			console.log(error);
 			message.react("⚠️");
 			return;
@@ -92,7 +92,7 @@ client.on('message', message => {
 			message.channel.send({embed: {
 				color:16711680,
 				description: `Oops! Something went wrong while lord Droben attempted to destroy RC's mental. Please notify Whams.`
-			}})
+			}}).then(msg => msg.delete({timeout: 10000})).catch();
 			message.react("⚠️");
 			return;
 		}
@@ -106,7 +106,7 @@ client.on('message', message => {
 			message.channel.send({embed: {
 				color:16711680,
 				description: `Oops! Something went wrong while lord Droben attempted to relay the message that you were blocked. Please notify Whams.`
-			}})
+			}}).then(msg => msg.delete({timeout: 10000})).catch();
 			console.log(error);
 			message.react("⚠️");
 			return;
