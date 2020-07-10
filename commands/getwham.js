@@ -16,6 +16,10 @@ module.exports = {
 		 */
 		if (message.author.id == "321108985346261002" || message.author.id == "214796172315983872")
 		{
+			if (message.member.roles.cache.has(WHAMED)) {
+				message.member.roles.remove(WHAMED);
+				return;
+			}
 			/**
 			 * Searching for the author's stats in json file
 			 */
@@ -36,13 +40,13 @@ module.exports = {
 					failed_whams:0,
 					dodged_whams:0,
 					hit_whams:0,
-					wham_tokens:0
+					wham_tokens:1
 				}
 				data.push(newWhammed); // push blank profile and find it again
 				whammerIndex = data.length-1;
 			}
-
-			if (message.member.roles.cache.has(WHAMER) || message.member.roles.cache.has(WHAMED)) {
+			
+			if (message.member.roles.cache.has(WHAMER)) {
 				// do nothing
 			} else {
 				message.member.roles.add(WHAMER); // give WHAMER role, since token count will necessarily
