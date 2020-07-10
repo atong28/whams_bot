@@ -6,11 +6,14 @@ module.exports = {
             const WHAMER = "730251287219929170";
             const WHAMED = "730251299140009988";
             if (message.member.roles.cache.has(WHAMER)) {
-                message.reply("you are a WHAMER!");
+                message.reply("you are a WHAMER!")
+                    .then(msg => {msg.delete(10000)}).catch( console.log(err));
             } else if (message.member.roles.cache.has(WHAMED)) {
-                message.reply("you are WHAMED!");
+                message.reply("you are WHAMED!")
+                    .then(msg => {msg.delete(10000)}).catch( console.log(err));
             } else {
-                message.reply("you are not WHAMED nor a WHAMER. Type more in chat to get a wham charge!");
+                message.reply("you are not WHAMED nor a WHAMER. Type more in chat to get a wham charge!")
+                    .then(msg => {msg.delete(10000)}).catch( console.log(err));;
             }
             message.react('✅');
         }
@@ -46,11 +49,14 @@ module.exports = {
             const WHAMER = "730251287219929170";
             const WHAMED = "730251299140009988";
             if (check.roles.cache.has(WHAMER)) {
-                message.channel.send(check.displayName+" is a WHAMER!");
+                message.channel.send(check.displayName+" is a WHAMER!")
+                .then(msg => {msg.delete(10000)}).catch( console.log(err));
             } else if (message.member.roles.cache.has(WHAMED)) {
-                message.channel.send(check.displayName+" is WHAMED!");
+                message.channel.send(check.displayName+" is WHAMED!")
+                .then(msg => {msg.delete(10000)}).catch( console.log(err));
             } else {
-                message.channel.send(check.displayName+"is not WHAMED nor a WHAMER. Type more in chat to get a wham charge!");
+                message.channel.send(check.displayName+"is not WHAMED nor a WHAMER. Type more in chat to get a wham charge!")
+                .then(msg => {msg.delete(10000)}).catch( console.log(err));
             }
             message.react('✅');
         }
