@@ -81,10 +81,10 @@ module.exports = {
              * Case 4: dodged whams
              */
             case "4":
-                data.sort((a, b) => (a.dodge_whams < b.dodge_whams) ? 1 : (a.dodge_whams === b.dodge_whams) ? ((message.guild.members.cache.get(a.id).displayName < message.guild.members.cache.get(b.id).displayName) ? 1 : -1) : -1 )
+                data.sort((a, b) => (a.dodged_whams < b.dodged_whams) ? 1 : (a.dodged_whams === b.dodged_whams) ? ((message.guild.members.cache.get(a.id).displayName < message.guild.members.cache.get(b.id).displayName) ? 1 : -1) : -1 )
                 for (i = 0; i < 10; i++) {
                     if (i == data.length) break;
-                    str += `${i+1}. ${message.guild.members.cache.get(data[i].id).displayName} (${data[i].dodge_whams})\n`;
+                    str += `${i+1}. ${message.guild.members.cache.get(data[i].id).displayName} (${data[i].dodged_whams})\n`;
                 }
                 message.channel.send({embed: {
                     color:16711680,
@@ -111,10 +111,10 @@ module.exports = {
              * Case 6: total defended whams
              */
             case "6":
-                data.sort((a, b) => (a.hit_whams+a.dodge_whams < b.hit_whams+b.dodge_whams) ? 1 : (a.hit_whams+a.dodge_whams === b.hit_whams+b.dodge_whams) ? ((message.guild.members.cache.get(a.id).displayName < message.guild.members.cache.get(b.id).displayName) ? 1 : -1) : -1 )
+                data.sort((a, b) => (a.hit_whams+a.dodged_whams < b.hit_whams+b.dodged_whams) ? 1 : (a.hit_whams+a.dodged_whams === b.hit_whams+b.dodged_whams) ? ((message.guild.members.cache.get(a.id).displayName < message.guild.members.cache.get(b.id).displayName) ? 1 : -1) : -1 )
                 for (i = 0; i < 10; i++) {
                     if (i == data.length) break;
-                    str += `${i+1}. ${message.guild.members.cache.get(data[i].id).displayName} (${data[i].hit_whams+data[i].dodge_whams})\n`;
+                    str += `${i+1}. ${message.guild.members.cache.get(data[i].id).displayName} (${data[i].hit_whams+data[i].dodged_whams})\n`;
                 }
                 message.channel.send({embed: {
                     color:16711680,
