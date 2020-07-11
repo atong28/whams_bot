@@ -6,10 +6,10 @@ const { ct, ct2, ct3 } = require('./customtext.json')
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./wham_game/commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+	const command = require(`./wham_game/commands/${file}`);
 
 	// set a new item in the Collection
 	// with the key as the command name and the value as the exported module
@@ -17,10 +17,10 @@ for (const file of commandFiles) {
 }
 
 client.backgrounds = new Discord.Collection();
-const backgroundsFiles = fs.readdirSync('.').filter(file => file.endsWith('.js'));
+const backgroundsFiles = fs.readdirSync('./wham_game/').filter(file => file.endsWith('.js'));
 
 for (const file of backgroundsFiles) {
-	const command = require(`./${file}`);
+	const command = require(`./wham_game/${file}`);
 
 	// set a new item in the Collection
 	// with the key as the command name and the value as the exported module
