@@ -53,6 +53,7 @@ module.exports = {
             Checking the leaderboards
             
             w!leaderboard <option>
+            Aliases: w!lb
 
             Option 1: Successful WHAMs
             Option 2: Failed WHAMs

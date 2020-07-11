@@ -13,7 +13,7 @@ module.exports = {
         
         message.channel.send({embed: {
             title: "WHAM GIVEAWAY",
-            description: "React with the gift emoji in 3 seconds to claim a WHAM charge!"
+            description: "React with the gift emoji in 4 seconds to claim a WHAM charge!"
         }}).then(msg => {
             msg.react("🎁"); 
             const filter = (reaction, user) => {
@@ -37,7 +37,7 @@ module.exports = {
                         if (whammerIndex == undefined)
                         {
                             let newWhammed = {
-                                id:message.member.id,
+                                id:user.id,
                                 successful_whams:0,
                                 failed_whams:0,
                                 dodged_whams:0,
@@ -71,7 +71,7 @@ module.exports = {
                     }
                 }
             });
-            msg.delete({timeout: 2000});
+            msg.delete({timeout: 3000});
         });
         
     }
