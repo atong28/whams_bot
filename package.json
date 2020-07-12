@@ -1,0 +1,26 @@
+{
+  "name": "whams_bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "eslint": "^7.0.0",
+    "teemojs": "^1.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atong28/whams_bot.git"
+  },
+  "keywords": [],
+  "author": "Anthony Tong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atong28/whams_bot/issues"
+  },
+  "homepage": "https://github.com/atong28/whams_bot#readme",
+  "description": ""
+}

@@ -1,14 +1,13 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
-const { ct, ct2, ct3 } = require('./customtext.json')
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-const commandFiles = fs.readdirSync('./wham_game/commands').filter(file => file.endsWith('.js'));
+const commandFilesWhams = fs.readdirSync('./wham_game/commands').filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
+for (const file of commandFilesWhams) {
 	const command = require(`./wham_game/commands/${file}`);
 
 	// set a new item in the Collection
@@ -17,14 +16,24 @@ for (const file of commandFiles) {
 }
 
 client.backgrounds = new Discord.Collection();
-const backgroundsFiles = fs.readdirSync('./wham_game/').filter(file => file.endsWith('.js'));
+const backgroundsFilesWhams = fs.readdirSync('./wham_game/').filter(file => file.endsWith('.js'));
 
-for (const file of backgroundsFiles) {
+for (const file of backgroundsFilesWhams) {
 	const command = require(`./wham_game/${file}`);
 
 	// set a new item in the Collection
 	// with the key as the command name and the value as the exported module
 	client.backgrounds.set(command.name, command);
+}
+
+const commandFilesLeague = fs.readdirSync('./league/commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFilesLeague) {
+	const command = require(`./league/commands/${file}`);
+
+	// set a new item in the Collection
+	// with the key as the command name and the value as the exported module
+	client.commands.set(command.name, command);
 }
 
 
@@ -53,7 +62,7 @@ client.on('message', message => {
 			return;
 		}
 	}
-	if (Math.random() < 0.01)
+	if (Math.random() < 0.02)
 	{
 		try {
 			const command = client.backgrounds.get("give_charge");
@@ -68,7 +77,7 @@ client.on('message', message => {
 			return;
 		}
 	}
-	else if (Math.random() < 0.02)
+	else if (Math.random() < 0.03)
 	{
 		try {
 			const command = client.backgrounds.get("throw_charge");

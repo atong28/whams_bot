@@ -64,14 +64,14 @@ module.exports = {
                         description: `You opened ${draven_spelling}'s gift, ${guildMember.displayName}! !wham another user to use his gift.`
                         }}).then(msg2 => {collector.stop(); msg2.delete({timeout:10000})}).catch();
 
-                        fs.writeFile("./counter.json", JSON.stringify(data), err => { 
+                        fs.writeFile("wham_game/counter.json", JSON.stringify(data), err => { 
                             // Checking for errors 
                             if (err) throw err;  
                         });
                     }
                 }
             });
-            msg.delete({timeout: 3000});
+            msg.delete({timeout: 3500});
         });
         
     }

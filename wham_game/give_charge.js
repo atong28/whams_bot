@@ -41,7 +41,7 @@ module.exports = {
 		data[whammerIndex].wham_tokens += 1;
 		message.member.roles.add(WHAMER);
 
-		fs.writeFile("counter.json", JSON.stringify(data), err => { 
+		fs.writeFile("wham_game/counter.json", JSON.stringify(data), err => { 
 			// Checking for errors 
 			if (err) throw err;  
 		  });

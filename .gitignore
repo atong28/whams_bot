@@ -1,3 +1,5 @@
 config.json
-counter.json
+wham_game/counter.json
+league/leagueconfig.json
+league/profiles.json
 node_modules/
