@@ -30,7 +30,6 @@ for (const file of backgroundsFilesWhams) {
  * League Commands
  */
 const commandFilesLeague = fs.readdirSync('./league/commands').filter(file => file.endsWith('.js'));
-
 for (const file of commandFilesLeague) {
 	const command = require(`./league/commands/${file}`);
 	client.commands.set(command.name, command);
@@ -39,13 +38,21 @@ for (const file of commandFilesLeague) {
 /**
  * Currency Commands
  */
-const commandsMoney = fs.readdirSync('./currency').filter(file => file.endsWith('.js'));
+const commandsMoney = fs.readdirSync('./currency/commands/').filter(file => file.endsWith('.js'));
 
 for (const file of commandsMoney) {
-	const command = require(`./currency/${file}`);
+	const command = require(`./currency/commands/${file}`);
 	client.commands.set(command.name, command);
 }
 
+/**
+ * Utility commands
+ */
+const commandFilesUtility = fs.readdirSync('./utility/commands').filter(file => file.endsWith('.js'));
+for (const file of commandFilesUtility) {
+	const command = require(`./utility/commands/${file}`);
+	client.commands.set(command.name, command);
+}
 
 client.once('ready', async () => {
 	console.log(`${client.user.username} is Ready!`);
@@ -61,7 +68,7 @@ client.on('message', async message => {
 	if (message.author.bot) return; //If mesage was sent by bot, then ignore
 
 	/*Bot Activity not involving Commands*/
-	if (Math.random() < 0.005) {
+	if (Math.random() < 0.005) { 
 		try {
 			const command = client.backgrounds.get("custom_text");
 			command.execute(message, Discord, client);

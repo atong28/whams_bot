@@ -103,11 +103,34 @@ module.exports = {
             
             Telling somebody "you are blocked <tag>" will cause the bot to send a private DM to them telling them that they are indeed blocked.
             
-            Rishimute: 10% chance for RC (Retro-Whams) to be censored.`);
-        message.member.user.send(embedGame);
-        message.member.user.send(embedGame2);
-        message.member.user.send(embedLeague);
-        message.member.user.send(embedOther);
+            Rishimute: 10% chance for RC (Retro-Whams) to be censored.`
+        );
+        
+        if (args.length === 0) {
+            message.member.user.send(embedGame);
+            message.member.user.send(embedGame2);
+            message.member.user.send(embedLeague);
+            message.member.user.send(embedOther);
+        }
+
+        switch (args[0].toLowerCase()) {
+            case "league":
+            case "l":
+                message.member.user.send(embedLeague);
+                break;
+            case "game":
+            case "whamsgame":
+            case "wham":
+                message.member.user.send(embedGame);
+                message.member.user.send(embedGame2);
+                break;
+            case "other":
+                message.member.user.send(embedOther);
+                break;
+            default:
+                break;
+        }
+        
         message.channel.send({embed: {
             description: `A DM has been sent to you, ${message.member}!`
         }}).then(msg => msg.delete({timeout: 10000})).catch();

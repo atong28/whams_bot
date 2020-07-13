@@ -7,7 +7,7 @@ module.exports = {
 		const data = require("../json/counter.json");
 		const fs = require("fs");
 		const {ct, ct2, ct3} = require('../json/customtext.json')
-		const prefix = require(".../config.json");
+		const prefix = require("../../config.json");
         const draven_spelling = ct3[Math.floor(Math.random()*ct3.length)];
 
 		if (message.member.roles.cache.has(WHAMED)) {
@@ -50,7 +50,7 @@ module.exports = {
 		  });
 		
 		message.channel.send({embed: {
-			description: `${draven_spelling} has blessed you, ${message.member.displayName}! ${prefix}wham another user to use his blessing.`
+			description: `${draven_spelling} has blessed you, ${message.member.displayName}! Wham another user to use his blessing.`
 		}}).then(msg => {msg.delete({timeout: 10000})}).catch();
     }
 }
