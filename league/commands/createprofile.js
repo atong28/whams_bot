@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'createprofile',
-	description: 'Creates your league profile.',
+    description: 'Creates your league profile.',
+    aliases: ['p'],
 	execute(message, args, Discord, client) {
         let profiles = require("../profiles.json");
         const TeemoJS = require('teemojs');
@@ -8,7 +9,7 @@ module.exports = {
         let api = TeemoJS(config.token);
         const fs = require("fs");
 
-        let user = undefined;
+        let userCheck = undefined;
 
         let league_user = undefined;
         
@@ -22,9 +23,9 @@ module.exports = {
 
         console.log(profiles);
 
-        user = profiles.find(user => user.discord_id == message.member.id);
+        userCheck = profiles.findIndex(userCheck => userCheck.discord_id == message.member.id);
         
-        if (user == undefined) {
+        if (userCheck == undefined) {
             message.channel.send({embed: {
                 description:`${message.member.displayName}, please reply in chat with your main account's username.`
             }}).then(msg => {
@@ -72,7 +73,7 @@ module.exports = {
                                                 Example: Alt1 | Alt2 | Alt3`
                                             }}).then(altMsg => {
                                                 const filter3 = m => m.member.id == message.member.id;
-                                                const collector3 = message.channel.createMessageCollector(filter, { time: 60000 });
+                                                const collector3 = message.channel.createMessageCollector(filter3, { time: 60000 });
                                                 
                                                 collector3.on('collect', m2 => {
                                                     const mAlts = m2.content.split("|");
@@ -168,7 +169,7 @@ module.exports = {
         } else {
             message.channel.send({embed: {
                 description:`${message.member.displayName}, you already have a profile linked!
-                If you would like to add an alt account, react with A.
+                If you would like to add alt accounts, react with A.
                 To exit, react with B, or wait for 60 seconds.`
             }}).then(linkedMsg => {
                 linkedMsg.react('🅰️');
@@ -186,11 +187,12 @@ module.exports = {
                             collector2.stop();
                             //linkedMsg.delete({timeout: 0});
                             message.channel.send({embed: {
-                                description: `Please respond with all of your alts, separated by a |
-                                Example: Alt1 | Alt2 | Alt3`
+                                description: `Please respond with all of your non-registered alts, separated by a |
+                                Example: Alt1 | Alt2 | Alt3
+                                Your current alts: ${profiles[userCheck].league_alts}`
                             }}).then(altMsg => {
                                 const filter3 = m => m.member.id == message.member.id;
-                                const collector3 = message.channel.createMessageCollector(filter, { time: 60000 });
+                                const collector3 = message.channel.createMessageCollector(filter3, { time: 60000 });
                                 
                                 collector3.on('collect', m2 => {
                                     const mAlts = m2.content.split("|");
@@ -203,7 +205,7 @@ module.exports = {
                                                 collector3.stop();
                                                 return;
                                             } else {
-                                                profile.league_alts.push(data2.name);
+                                                profiles[userCheck].league_alts.push(data2.name);
                                             }
                                         });
                                     }
@@ -213,10 +215,8 @@ module.exports = {
                                         //altMsg.delete({timeout:0});
                                         message.channel.send({embed: {
                                             description: `Congratulations, ${message.member.displayName}! Your profile has been updated.
-                                            The alts you sent are: ${alts}`
+                                            Your alt list is now: ${profiles[userCheck].league_alts}`
                                         }})
-                                        
-                                        profiles.push(profile);
                                         console.log(profiles);
                                         fs.writeFile("league/profiles.json", JSON.stringify(profiles), err => { 
                                             // Checking for errors 
@@ -241,19 +241,8 @@ module.exports = {
                             collector2.stop();
                             //linkedMsg.delete({timeout: 0});
                             message.channel.send({embed: {
-                                description: `Congratulations, ${message.member.displayName}! Your profile has been updated.`
+                                description: `You have exited profile creation.`
                             }})
-                            let profile = {
-                                discord_id: message.member.id,
-                                league_username: league_user,
-                                league_alts: []
-                            }
-                            profiles.push(profile);
-                            fs.writeFile("league/profiles.json", JSON.stringify(profiles), err => { 
-                                // Checking for errors 
-                                if (err) throw err;  
-                            }); 
-                            
                         }
                     }
                 });

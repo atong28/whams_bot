@@ -63,6 +63,26 @@ module.exports = {
             Option 6: Total WHAM! receiving attempts
             Option 7: Total WHAM! tokens
             `);
+        embedLeague = new Discord.MessageEmbed()
+            .setTitle('League of Legends')
+            .setDescription(`w!createprofile
+            Link your League of Legends account(s) to your Discord username!
+            Follow the prompted instructions.
+            Aliases: w!cp
+
+            w!listaccounts
+            List the accounts of a specific Discord user, if they have their accounts linked.
+            Usage: w!listaccounts <main/alt/all> <user>
+            The default user is the person executing the command.
+            Aliases: w!la
+
+            w!profile
+            Check the profile of a specific Discord user, if they have their accounts linked.
+            Usage: w!profile <account number> <user>
+            The default user is the person executing the command, and the default account is the main account.
+            The alts' account numbers begin from 2, and can be checked via w!listaccounts.
+            Aliases: w!p
+            `);
         embedOther = new Discord.MessageEmbed()
             .setTitle('Miscellaneous')
             .setDescription(`Other features of the Whams Bot:
@@ -71,9 +91,13 @@ module.exports = {
             Telling somebody "you are blocked <tag>" will cause the bot to send a private DM to them telling them that they are indeed blocked.
             
             Rishimute: 10% chance for RC (Retro-Whams) to be censored.`);
-        message.channel.send(embedGame).then(msg => {msg.delete({timeout: 60000})}).catch();
-        message.channel.send(embedGame2).then(msg => {msg.delete({timeout: 60000})}).catch();
-        message.channel.send(embedOther).then(msg => {msg.delete({timeout: 60000})}).catch();
+        message.member.user.send(embedGame);
+        message.member.user.send(embedGame2);
+        message.member.user.send(embedLeague);
+        message.member.user.send(embedOther);
+        message.channel.send({embed: {
+            description: `A DM has been sent to you, ${message.member}!`
+        }}).then(msg => msg.delete({timeout: 10000})).catch();
         message.react("✅");
     } 
 }

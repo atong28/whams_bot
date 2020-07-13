@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'listaccounts',
-	description: 'Creates your league profile.',
+    description: 'Creates your league profile.',
+    aliases: ['la'],
 	execute(message, args, Discord, client) {
         const profiles = require('./../profiles.json');
 
