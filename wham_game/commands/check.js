@@ -6,7 +6,7 @@ module.exports = {
         /**
          * Initializes general data variables
          */
-        const data = require("./../counter.json");
+        const data = require("../json/counter.json");
         const WHAMER = "730251287219929170";
         const WHAMED = "730251299140009988";
         let whammerIndex = undefined;

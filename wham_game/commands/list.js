@@ -6,13 +6,12 @@ module.exports = {
         /**
          * Initializes general data variables
          */
-        const data = require("./../counter.json");
+        const data = require("../json/counter.json");
         const guild = message.guild;
         const WHAMER = "730251287219929170";
         const WHAMED = "730251299140009988";
         const WHAMER_ROLE = guild.roles.cache.get(WHAMER);
         const WHAMED_ROLE = guild.roles.cache.get(WHAMED);
-        const fs = require("fs"); 
         let str = "People that are ";
         if (args.length === 0) {
             message.reply(`you need to specify which list you'd like to see!

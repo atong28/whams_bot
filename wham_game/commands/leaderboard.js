@@ -7,7 +7,7 @@ module.exports = {
         /**
          * Initializes general data variables
          */
-        const data = require("./../counter.json");
+        const data = require("../json/counter.json");
 
         if (args.length === 0) {
             message.channel.send({embed: {

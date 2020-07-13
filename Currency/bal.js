@@ -6,7 +6,7 @@ module.exports = {
 		/**
          * Initializes general data variables
          */
-		const data = require("accounts.json");
+		const data = require("./accounts.json");
 		const fs = require("fs"); 
 
         /**
@@ -23,12 +23,12 @@ module.exports = {
          */
         if (memberIndex == undefined)
         {
-            let newWhammed = {
+            let newAccount = {
                 id:message.member.id,
                 bal: 0
             }
             data.push(newAccount); // push blank profile and find it again
-            whammerIndex = data.length-1;
+            memberIndex = data.length-1;
         }
 
         message.react("✅");
@@ -36,7 +36,8 @@ module.exports = {
             color: 15844367,
             description: `**${message.member.displayName}'s Balance:** ${data[memberIndex].bal}`
         }})
-        fs.writeFile("wham_game/counter.json", JSON.stringify(data), err => { 
+
+        fs.writeFile("Currency/accounts.json", JSON.stringify(data), err => { 
             // Checking for errors 
             if (err) throw err;  
         });

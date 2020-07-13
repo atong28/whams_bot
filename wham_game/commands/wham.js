@@ -6,14 +6,14 @@ module.exports = {
         /**
          * Initializes general data variables
          */
-		const { ct, ct2 } = require('./../customtext.json')
+		const { ct, ct2 } = require('../json/customtext.json')
 		const customtext = Math.floor(Math.random()*ct.length);
 	    const customtext2 = Math.floor(Math.random()*ct2.length);
 
         const WHAMED = "730251299140009988";
         const WHAMER = "730251287219929170";
 
-        const data = require("./../counter.json");
+        const data = require("../json/counter.json");
         const fs = require("fs"); 
 
         /**
@@ -174,7 +174,7 @@ module.exports = {
             /**
              * Write to file, update data
              */
-            fs.writeFile("wham_game/counter.json", JSON.stringify(data), err => { 
+            fs.writeFile("wham_game/json/counter.json", JSON.stringify(data), err => { 
                 // Checking for errors 
                 if (err) throw err;  
             }); 

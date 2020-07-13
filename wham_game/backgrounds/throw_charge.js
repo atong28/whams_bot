@@ -6,9 +6,9 @@ module.exports = {
 	execute(message, Discord, client) {
         const WHAMED = "730251299140009988";
         const WHAMER = "730251287219929170";
-        const {ct, ct2, ct3} = require('./customtext.json')
+        const {ct, ct2, ct3} = require('../json/customtext.json')
         const draven_spelling = ct3[Math.floor(Math.random()*ct3.length)];
-        const data = require("./counter.json");
+        const data = require("../json/counter.json");
         const fs = require("fs");
         
         message.channel.send({embed: {
@@ -64,7 +64,7 @@ module.exports = {
                         description: `You opened ${draven_spelling}'s gift, ${guildMember.displayName}! !wham another user to use his gift.`
                         }}).then(msg2 => {collector.stop(); msg2.delete({timeout:10000})}).catch();
 
-                        fs.writeFile("wham_game/counter.json", JSON.stringify(data), err => { 
+                        fs.writeFile("wham_game/json/counter.json", JSON.stringify(data), err => { 
                             // Checking for errors 
                             if (err) throw err;  
                         });

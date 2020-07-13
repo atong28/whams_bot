@@ -8,7 +8,7 @@ module.exports = {
          */
 		const WHAMED = "730251299140009988";
 		const WHAMER = "730251287219929170";
-		const data = require("./../counter.json");
+		const data = require("../json/counter.json");
 		const fs = require("fs"); 
 
 		/**
@@ -55,7 +55,7 @@ module.exports = {
 			data[whammerIndex].wham_tokens += 1; // give the user a token
 
 			message.react("✅");
-			fs.writeFile("wham_game/counter.json", JSON.stringify(data), err => { 
+			fs.writeFile("wham_game/json/counter.json", JSON.stringify(data), err => { 
 				// Checking for errors 
 				if (err) throw err;  
 			});

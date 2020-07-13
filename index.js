@@ -7,32 +7,42 @@ client.commands = new Discord.Collection();
 
 const commandFilesWhams = fs.readdirSync('./wham_game/commands').filter(file => file.endsWith('.js'));
 
+/**
+ * Whams Bot Game Commands
+ */
 for (const file of commandFilesWhams) {
 	const command = require(`./wham_game/commands/${file}`);
-
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
 	client.commands.set(command.name, command);
 }
 
+/**
+ * Background Bot Actions
+ */
 client.backgrounds = new Discord.Collection();
-const backgroundsFilesWhams = fs.readdirSync('./wham_game/').filter(file => file.endsWith('.js'));
+const backgroundsFilesWhams = fs.readdirSync('./wham_game/backgrounds').filter(file => file.endsWith('.js'));
 
 for (const file of backgroundsFilesWhams) {
-	const command = require(`./wham_game/${file}`);
-
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
+	const command = require(`./wham_game/backgrounds/${file}`);
 	client.backgrounds.set(command.name, command);
 }
 
+/**
+ * League Commands
+ */
 const commandFilesLeague = fs.readdirSync('./league/commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFilesLeague) {
 	const command = require(`./league/commands/${file}`);
+	client.commands.set(command.name, command);
+}
 
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
+/**
+ * Currency Commands
+ */
+const commandsMoney = fs.readdirSync('./Currency').filter(file => file.endsWith('.js'));
+
+for (const file of commandsMoney) {
+	const command = require(`./Currency/${file}`);
 	client.commands.set(command.name, command);
 }
 

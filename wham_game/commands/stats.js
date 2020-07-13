@@ -6,7 +6,7 @@ module.exports = {
         /**
          * Initializes general data variables
          */
-        const data = require("./../counter.json");
+        const data = require("../json/counter.json");
         let person = message.member;
         /**
          * If  no args is provided, assumes asking stats about self

@@ -4,9 +4,9 @@ module.exports = {
 	execute(message, Discord, client) {
         const WHAMED = "730251299140009988";
 		const WHAMER = "730251287219929170";
-		const data = require("./counter.json");
+		const data = require("../json/counter.json");
 		const fs = require("fs");
-		const {ct, ct2, ct3} = require('./customtext.json')
+		const {ct, ct2, ct3} = require('../json/customtext.json')
         const draven_spelling = ct3[Math.floor(Math.random()*ct3.length)];
 
 		if (message.member.roles.cache.has(WHAMED)) {
@@ -41,7 +41,7 @@ module.exports = {
 		data[whammerIndex].wham_tokens += 1;
 		message.member.roles.add(WHAMER);
 
-		fs.writeFile("wham_game/counter.json", JSON.stringify(data), err => { 
+		fs.writeFile("wham_game/json/counter.json", JSON.stringify(data), err => { 
 			// Checking for errors 
 			if (err) throw err;  
 		  });
