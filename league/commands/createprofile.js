@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'createprofile',
     description: 'Creates your league profile.',
-    aliases: ['p'],
+    aliases: ['cp'],
 	execute(message, args, Discord, client) {
         let profiles = require("../profiles.json");
         const TeemoJS = require('teemojs');
@@ -18,7 +18,9 @@ module.exports = {
         let profile = {
             discord_id: message.member.id,
             league_username: league_user,
-            league_alts: alts
+            league_alts: alts,
+            lanes: [],
+            lfd: false
         }
 
         console.log(profiles);
@@ -37,10 +39,10 @@ module.exports = {
                     message.channel.send({embed: {
                         description: `You replied with ${m.content}. Searching for this username:`
                     }}).then(searchingMsg => {
-                        //msg.delete({timeout: 0});
-                        //m.delete({timeout: 0});
+                        msg.delete({timeout: 0});
+                        m.delete({timeout: 0});
                         api.get('na1','summoner.getBySummonerName',m.content).then (data => {
-                            //searchingMsg.delete({timeout: 0});
+                            searchingMsg.delete({timeout: 0});
                             if (data == null) {
                                 message.channel.send({embed: {
                                     description: `I could not find your account, ${message.member.displayName}! Please make sure the spelling is correct.`
@@ -67,7 +69,7 @@ module.exports = {
                                     if (!user.bot) {
                                         if (reaction.emoji.name === '🅰️') {
                                             collector2.stop();
-                                            //linkedMsg.delete({timeout: 0});
+                                            linkedMsg.delete({timeout: 0});
                                             message.channel.send({embed: {
                                                 description: `Please respond with all of your alts, separated by a |
                                                 Example: Alt1 | Alt2 | Alt3`
@@ -92,8 +94,8 @@ module.exports = {
                                                     }
                                                     setTimeout(function() {
                                                         collector3.stop();
-                                                        //m2.delete({timeout:0});
-                                                        //altMsg.delete({timeout:0});
+                                                        m2.delete({timeout:0});
+                                                        altMsg.delete({timeout:0});
                                                         message.channel.send({embed: {
                                                             description: `Congratulations, ${message.member.displayName}! Your profile has been linked.
                                                             The alts you sent are: ${alts}`
@@ -111,7 +113,7 @@ module.exports = {
 
                                                 collector.on('end', collected => {
                                                     if (collected.size == 0) {
-                                                        //msg.delete({timeout: 0});
+                                                        msg.delete({timeout: 0});
                                                         message.channel.send({embed: {
                                                             description:`You did not respond with anything, ${message.member.displayName}! No profile has been linked.`
                                                         }})
@@ -122,7 +124,7 @@ module.exports = {
                                             
                                         } else {
                                             collector2.stop();
-                                            //linkedMsg.delete({timeout: 0});
+                                            linkedMsg.delete({timeout: 0});
                                             message.channel.send({embed: {
                                                 description: `Congratulations, ${message.member.displayName}! Your profile has been linked.`
                                             }})
@@ -138,7 +140,7 @@ module.exports = {
                                 
                                 collector2.on('end', collected => {
                                     if (collected.size == 0) {
-                                        //linkedMsg.delete({timeout: 0});
+                                        linkedMsg.delete({timeout: 0});
                                         message.channel.send({embed: {
                                             description:`You did not respond with anything, ${message.member.displayName}! No profile has been linked.`
                                         }})
@@ -153,7 +155,7 @@ module.exports = {
 
                 collector.on('end', collected => {
                     if (collected.size == 0) {
-                        //msg.delete({timeout: 0});
+                        msg.delete({timeout: 0});
                         message.channel.send({embed: {
                             description:`You did not respond with anything, ${message.member.displayName}! No profile has been linked.`
                         }})
@@ -180,7 +182,7 @@ module.exports = {
                     if (!user.bot) {
                         if (reaction.emoji.name === '🅰️') {
                             collector2.stop();
-                            //linkedMsg.delete({timeout: 0});
+                            linkedMsg.delete({timeout: 0});
                             message.channel.send({embed: {
                                 description: `Please respond with all of your non-registered alts, separated by a |
                                 Example: Alt1 | Alt2 | Alt3
@@ -206,8 +208,8 @@ module.exports = {
                                     }
                                     setTimeout(function() {
                                         collector3.stop();
-                                        //m2.delete({timeout:0});
-                                        //altMsg.delete({timeout:0});
+                                        m2.delete({timeout:0});
+                                        altMsg.delete({timeout:0});
                                         message.channel.send({embed: {
                                             description: `Congratulations, ${message.member.displayName}! Your profile has been updated.
                                             Your alt list is now: ${profiles[userCheck].league_alts}`
@@ -223,7 +225,7 @@ module.exports = {
 
                                 collector.on('end', collected => {
                                     if (collected.size == 0) {
-                                        //msg.delete({timeout: 0});
+                                        msg.delete({timeout: 0});
                                         message.channel.send({embed: {
                                             description:`You did not respond with anything, ${message.member.displayName}! No profile has been updated.`
                                         }})

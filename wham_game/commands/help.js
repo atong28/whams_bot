@@ -82,6 +82,19 @@ module.exports = {
             The default user is the person executing the command, and the default account is the main account.
             The alts' account numbers begin from 2, and can be checked via w!listaccounts.
             Aliases: w!p
+
+            w!lookforduo
+            Toggle your looking for duo status. Default is false. If the profile does not have its lane roles set yet,
+            you will be prompted to set lanes. An alternative way to set lanes is by using w!changelanes.
+            Aliases: w!lfd
+
+            w!changelanes
+            Changes your current lanes. Follow prompted instructions.
+            Aliases: w!cl
+
+            w!duolist
+            View people who have the looking-for-duo option turned on. Future releases: view rank, etc. (For now, use w!p)
+            Aliases: w!dl
             `);
         embedOther = new Discord.MessageEmbed()
             .setTitle('Miscellaneous')

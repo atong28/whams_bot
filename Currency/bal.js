@@ -6,6 +6,7 @@ module.exports = {
 		/**
          * Initializes general data variables
          */
+        const colors = require("../colors.json");
 		const data = require("./accounts.json");
 		const fs = require("fs"); 
 
@@ -23,23 +24,14 @@ module.exports = {
          */
         if (memberIndex == undefined)
         {
-            let newAccount = {
-                id:message.member.id,
-                bal: 0
-            }
-            data.push(newAccount); // push blank profile and find it again
-            memberIndex = data.length-1;
+
         }
-
-        message.react("✅");
-        message.reply({embed: {
-            color: 15844367,
-            description: `**${message.member.displayName}'s Balance:** ${data[memberIndex].bal}`
-        }})
-
-        fs.writeFile("Currency/accounts.json", JSON.stringify(data), err => { 
-            // Checking for errors 
-            if (err) throw err;  
-        });
+            
+        {
+            message.reply({embed: {
+                color: colors.GOLD,
+                description: `**${message.member.displayName}'s Balance:**`
+            }});
     }
 }
+        

@@ -39,25 +39,28 @@ for (const file of commandFilesLeague) {
 /**
  * Currency Commands
  */
-const commandsMoney = fs.readdirSync('./Currency').filter(file => file.endsWith('.js'));
+const commandsMoney = fs.readdirSync('./currency').filter(file => file.endsWith('.js'));
 
 for (const file of commandsMoney) {
-	const command = require(`./Currency/${file}`);
+	const command = require(`./currency/${file}`);
 	client.commands.set(command.name, command);
 }
 
 
-client.once('ready', () => {
-	console.log('Ready!');
+client.once('ready', async () => {
+	console.log(`${client.user.username} is Ready!`);
+	client.user.setActivity(`cries of ${prefix}help`, {type: "LISTENING"});
 });
 
-client.on('message', message => {
+client.on('message', async message => {
   
   const WHAMED = "730251299140009988";
   const WHAMER = "730251287219929170";
+  const rishiId = "557379287460741143";
 
-	if (message.author.bot) return;
+	if (message.author.bot) return; //If mesage was sent by bot, then ignore
 
+	/*Bot Activity not involving Commands*/
 	if (Math.random() < 0.005) {
 		try {
 			const command = client.backgrounds.get("custom_text");
@@ -102,7 +105,7 @@ client.on('message', message => {
 			return;
 		}
 	}
-	if (message.author.id == "557379287460741143")
+	if (message.author.id == rishiId)
 	{
 		try {
 			const command = client.backgrounds.get("rishi_mute");
@@ -122,19 +125,22 @@ client.on('message', message => {
 			const command = client.backgrounds.get("blocked");
 			command.execute(message, Discord, client);
 		} catch (error) {
-			message.channel.send({embed: {
-				color:16711680,
-				description: `Oops! Something went wrong while lord Droben attempted to relay the message that you were blocked. Please notify Whams.`
-			}}).then(msg => msg.delete({timeout: 10000})).catch();
+			message.channel.send({
+				embed: {
+					color:16711680,
+					description: `Oops! Something went wrong while lord Droben attempted to relay the message that you were blocked. Please notify Whams.`
+				}
+			}).then(msg => msg.delete({timeout: 10000})).catch();
 			console.log(error);
 			message.react("⚠️");
 			return;
 		}
 		
 	}
+	
 	if (!message.content.startsWith(prefix)) return;
 
-
+	/*Bot activity involving commands*/
 
 	const args = message.content.slice(prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
@@ -158,4 +164,5 @@ client.on('message', message => {
 	}
 	// other commands...
 });
+
 client.login(token);

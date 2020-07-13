@@ -142,8 +142,14 @@ module.exports = {
 
                         switch (data2.length) {
                             case 2:
-                                rankedSolo = `${data2[0].tier} ${data2[0].rank}\n${data2[0].wins}W/${data2[0].losses}L\n${Math.round((data2[0].wins * 100) / (data2[0].wins + data2[0].losses))}% WR`;
-                                rankedFlex = `${data2[1].tier} ${data2[1].rank}\n${data2[1].wins}W/${data2[1].losses}L\n${(data2[1].wins * 100) / (data2[1].wins + data2[1].losses)}% WR`;
+                                if (data2[0].queueType == 'RANKED_SOLO_5x5') {
+                                    rankedSolo = `${data2[0].tier} ${data2[0].rank}\n${data2[0].wins}W/${data2[0].losses}L\n${Math.round((data2[0].wins * 100) / (data2[0].wins + data2[0].losses))}% WR`;
+                                    rankedFlex = `${data2[1].tier} ${data2[1].rank}\n${data2[1].wins}W/${data2[1].losses}L\n${Math.round((data2[1].wins * 100) / (data2[1].wins + data2[1].losses))}% WR`;
+                                } else {
+                                    rankedFlex = `${data2[0].tier} ${data2[0].rank}\n${data2[0].wins}W/${data2[0].losses}L\n${Math.round((data2[0].wins * 100) / (data2[0].wins + data2[0].losses))}% WR`;
+                                    rankedSolo = `${data2[1].tier} ${data2[1].rank}\n${data2[1].wins}W/${data2[1].losses}L\n${Math.round((data2[1].wins * 100) / (data2[1].wins + data2[1].losses))}% WR`;
+                                }
+                                
                                 break;
                             case 1:
                                 if (data2[0].queueType == 'RANKED_SOLO_5x5') {
@@ -169,6 +175,9 @@ module.exports = {
                     });
                 })
             });
+        if (playerData.lanes.length == 0) {
+            
+        }
         setTimeout(function() {
             const regex = / /gi;
             let profile = new Discord.MessageEmbed()
@@ -180,11 +189,12 @@ module.exports = {
                 .addField(`Masteries`, `${mastery1+mastery2+mastery3}`, true)
                 .addField(`Ranked Solo/Duo`,rankedSolo, true)
                 .addField(`Ranked Flex`, rankedFlex, true)
+                .addField(`Lane Roles`,)
                 .setFooter(lastPlayed)
                 .setThumbnail(image);
             message.channel.send(profile);
             
-        }, 1000);
+        }, 1500);
         
         
     }

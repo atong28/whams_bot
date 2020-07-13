@@ -14,7 +14,18 @@ module.exports = {
         const WHAMER = "730251287219929170";
 
         const data = require("../json/counter.json");
+        const colors = require("./../../colors.json")
         const fs = require("fs"); 
+
+        if (message.channel.id != "731254537817686236")
+        {
+            message.reply({embed: {
+                color: colors.RED,
+                description: `You can't do that here.`
+            }}).then(msg => {msg.delete({timeout: 5000})}).catch();
+            message.react("🚫")
+            return;
+        }
 
         /**
          * Combine args (no spaces)
