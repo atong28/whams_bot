@@ -76,7 +76,18 @@ module.exports = {
         if (acctNumber == 1) {
             username = playerData.league_username;
         } else {
+            if (league_alts.length <= acctNumber - 2) {
+                message.channel.send({embed:{
+                    description: `The account number you entered was too high.`
+                }});
+            }
             username = playerData.league_alts[acctNumber-2];
+        }
+
+        if (username == undefined) {
+            message.channel.send({embed:{
+                description: `Uh oh. Something went wrong. Make sure your account is as you expect.`
+            }});
         }
 
         const fetch = require('node-fetch');

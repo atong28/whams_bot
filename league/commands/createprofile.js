@@ -25,7 +25,7 @@ module.exports = {
 
         userCheck = profiles.findIndex(userCheck => userCheck.discord_id == message.member.id);
         
-        if (userCheck == undefined) {
+        if (userCheck == -1) {
             message.channel.send({embed: {
                 description:`${message.member.displayName}, please reply in chat with your main account's username.`
             }}).then(msg => {
@@ -126,11 +126,6 @@ module.exports = {
                                             message.channel.send({embed: {
                                                 description: `Congratulations, ${message.member.displayName}! Your profile has been linked.`
                                             }})
-                                            let profile = {
-                                                discord_id: message.member.id,
-                                                league_username: league_user,
-                                                league_alts: []
-                                            }
                                             profiles.push(profile);
                                             fs.writeFile("league/profiles.json", JSON.stringify(profiles), err => { 
                                                 // Checking for errors 
