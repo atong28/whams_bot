@@ -156,6 +156,7 @@ client.on('message', async message => {
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 	if (!command) {
+		message.react("❓");
 		message.delete({timeout: 10000}).catch();
 		return;
 	}

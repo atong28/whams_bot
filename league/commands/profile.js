@@ -57,14 +57,10 @@ module.exports = {
 
         let playerIndex = undefined;
 
-        for (i = 0; i < profiles.length; i++) {
-            if (profiles[i].discord_id == user.id) {
-                playerIndex = i;
-                break;
-            }
-        }
+        playerIndex = profiles.findIndex(i => profiles[i].discord_id == user.id);
 
-        if (playerIndex == undefined) {
+
+        if (playerIndex == -1) {
             message.channel.send({embed: {
                 description: `${user} is not registered in my system!\nPlease tell them to create a profile by doing w!createprofile.`
             }})

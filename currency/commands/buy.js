@@ -20,13 +20,9 @@ module.exports = {
         /**
          * Find user and create new account if not present
          */
-		let memberIndex = undefined;
-		for (i = 0; i < data.length; i++) {
-			if (data[i].id == message.member.id) {
-				memberIndex = i;
-			}
-		}
-		if (memberIndex == undefined)
+
+		memberIndex = data.findIndex(ind => ind.id == message.member.id);
+		if (memberIndex == -1)
 		{
 			newAccount = {
 				id: message.member.id,
@@ -75,12 +71,31 @@ module.exports = {
 			}
 			else
 			{
+				/**
+				 * Do action first; if action is invalid, error thrown, command cancelled, no action taken
+				 */
+				try {
+					const command = require(`./${prices[priceIndex].action}`);
+					command.execute(message, memberIndex, Discord, client);
+				} catch (error) {
+					message.channel.send({embed: {
+						description: `${error}`
+					}});
+					return;
+				}
+				
+
+
+
 				message.channel.send({embed: {
 					color: colors.GREEN,
 					description: `You purchased ${prices[priceIndex].name} for: ${priceS}<:silvercoin:732299457428848732>  ${priceG}<:goldcoin:732296673019035721>`
 				}}).then(msg => {msg.delete({timeout: 10000})}).catch();
-				data[memberIndex].gold_bal -= gPrice;
-				data[memberIndex].silver_bal -= sPrice;
+				data[memberIndex].gold_bal -= priceG;
+				data[memberIndex].silver_bal -= priceS;
+
+				
+				
 			}
 		}
         

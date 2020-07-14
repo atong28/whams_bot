@@ -13,16 +13,11 @@ module.exports = {
         /**
          * Searching for the author's account in json file
          */
-        let memberIndex = undefined;
-        for (i = 0; i < data.length; i++) {
-            if (data[i].id == message.member.id) {
-                memberIndex = i;
-            }
-        }
+        memberIndex = data.findIndex(ind => ind.id == message.member.id);
         /**
          * If user not in json file, return blank
          */
-        if (memberIndex == undefined)
+        if (memberIndex == -1)
         {
             message.channel.send({embed: {
                 color: colors.GOLD,
