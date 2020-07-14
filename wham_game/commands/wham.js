@@ -175,7 +175,7 @@ module.exports = {
                 }}).then(msg => {
                     try {                                                               
                         const command = require(`../../currency/commands/shopActions/addmoney.js`);     
-                        command.execute(msg, [message.member.displayName, 3], Discord, client);                 
+                        command.execute(msg, [message.member.displayName.replace(/\s+/g, ''), "3"], Discord, client);                 
                     } catch (error) {                     
                         message.channel.send({embed: {
                             description: `${error}`

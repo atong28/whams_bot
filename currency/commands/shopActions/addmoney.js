@@ -13,6 +13,15 @@ module.exports = {
                 color: colors.RED,
                 description: `Missing arguments. You need to include a member and an amount to give.`
             }})
+            return;
+        }
+
+        if (isNaN(args[args.length-1])) {
+            message.channel.send({embed:{
+                color: colors.RED,
+                description: `Usage: w!addmoney <user> <amount>`
+            }});
+            return;
         }
 
 
@@ -38,6 +47,7 @@ module.exports = {
                 mem.roles
             }
             catch (error) {
+                console.log(error);
                 message.react("❓");
                 return;
             }
@@ -60,7 +70,6 @@ module.exports = {
             data.push(newAccount);
             memberIndex = data.length-1;
         }
-        console.log(`found member ${mem.displayName} at index ${memberIndex}`);
         data[memberIndex].silver_bal += parseInt(args[args.length-1]);
         message.channel.send({embed: {
             color: colors.GOLD,

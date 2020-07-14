@@ -22,19 +22,25 @@ module.exports = {
             }});
             return;
         }
+
+        if (isNaN(args[args.length-1])) {
+            message.channel.send({embed:{
+                color: colors.RED,
+                description: `Usage: w!addmoney <user> <amount>`
+            }});
+            return;
+        }
         
         let mem = undefined;
         
         if (message.mentions.members.size < 1)
         {
-            console.log(`no mention`);
             argStr = "";
             for (i = 0; i < args.length-1; i++)
             {
                 argStr += args[i];
             }
             mem = message.guild.members.cache.find(m => (argStr.toLowerCase() == m.displayName.toLowerCase().replace(/\s+/g, '')));
-            console.log(mem);
             try {
                 mem.roles
             }
@@ -45,13 +51,12 @@ module.exports = {
         }
         else
         {
-            console.log(`mention`);
             mem = message.mentions.members.first();
         }
         /**
          * Find user and create new account if not present
          */
-        memberIndex = data.findIndex(ind => ind.id == message.member.id);
+        memberIndex = data.findIndex(ind => ind.id == mem.id);
         if (memberIndex == -1)
         {
             newAccount = {
@@ -62,11 +67,10 @@ module.exports = {
             data.push(newAccount);
             memberIndex = data.length-1;
         }
-        console.log(`found member ${mem.displayName} at index ${memberIndex}`);
         data[memberIndex].gold_bal += parseInt(args[args.length-1]);
         message.channel.send({embed: {
             color: colors.GOLD,
-            description: `Added ${parseInt(args[args.length-1])}<:goldcoin:732296673019035721> to ${mem.displayName}'s balance.`
+            description: `Added ${parseInt(args[args.length-1])}<:goldcoin:732296673019035721> to ${mem.displayName}'s balance.\nNew balance: ${data[memberIndex].gold_bal}<:goldcoin:732296673019035721>`
         }}).then(msg => msg.delete({timeout: 10000}).catch());
         
 
