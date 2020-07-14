@@ -153,7 +153,6 @@ module.exports = {
                     color: 6160243,
                     description: `${whamed} avoided getting a WHAM from ${message.member}.`
                 }}).then(msg => {msg.delete({timeout: 10000})}).catch();
-
                 data[whammerIndex].failed_whams += 1;
                 data[whammedIndex].dodged_whams += 1;
                 data[whammerIndex].wham_tokens -= 1;
@@ -173,7 +172,18 @@ module.exports = {
                 message.channel.send({embed: {
                     color: 4474111,
                     description: `${whamed}, you got WHAMED by ${message.member} - ${ct2[customtext2]}`
-                }}).then(msg => {msg.delete({timeout: 10000})}).catch();
+                }}).then(msg => {
+                    try {                                                               
+                        const command = require(`../../currency/commands/shopActions/addmoney.js`);     
+                        command.execute(msg, [message.member.displayName, 3], Discord, client);                 
+                    } catch (error) {                     
+                        message.channel.send({embed: {
+                            description: `${error}`
+                        }});
+                        return;
+                    }       
+                    msg.delete({timeout: 10000})
+                }).catch();
 
                 data[whammerIndex].successful_whams += 1;
                 data[whammedIndex].hit_whams += 1;
