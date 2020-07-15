@@ -54,6 +54,15 @@ for (const file of commandFilesUtility) {
 	client.commands.set(command.name, command);
 }
 
+/**
+ * Mafia commands
+ */
+const commandFilesMafia = fs.readdirSync('./mafia').filter(file => file.endsWith('.js'));
+for (const file of commandFilesMafia) {
+	const command = require(`./mafia/${file}`);
+	client.commands.set(command.name, command);
+}
+
 client.once('ready', async () => {
 	console.log(`${client.user.username} is Ready!`);
 	client.user.setActivity(`cries of ${prefix}help`, {type: "LISTENING"});

@@ -105,12 +105,16 @@ module.exports = {
             
             Rishimute: 10% chance for RC (Retro-Whams) to be censored.`
         );
-        
+        message.channel.send({embed: {
+            description: `A DM has been sent to you, ${message.member}!`
+        }}).then(msg => msg.delete({timeout: 10000})).catch();
+        message.react("✅");
         if (args.length === 0) {
             message.member.user.send(embedGame);
             message.member.user.send(embedGame2);
             message.member.user.send(embedLeague);
             message.member.user.send(embedOther);
+            return;
         }
 
         switch (args[0].toLowerCase()) {
@@ -131,9 +135,6 @@ module.exports = {
                 break;
         }
         
-        message.channel.send({embed: {
-            description: `A DM has been sent to you, ${message.member}!`
-        }}).then(msg => msg.delete({timeout: 10000})).catch();
-        message.react("✅");
+        
     } 
 }

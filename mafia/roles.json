@@ -1,0 +1,60 @@
+[
+    {
+        "name": "Town",
+        "faction": "Town",
+        "roledm": "You are a member of the Town.\nYou have no special powers.\nYou win when all threats to the town are dead."
+    },
+    {
+        "name": "Town Cop",
+        "faction": "Town",
+        "roledm": "You are a Cop.\nEach night, you can investigate one player to determine their alignment.\nYou win when all threats to the town are dead."
+    },
+    {
+        "name": "Town Doctor",
+        "faction": "Town",
+        "roledm": "You are a Doctor.\nEach night, you can protect one player. They become immune to nightkills.\nYou win when all threats to the town are dead."
+    },
+    {
+        "name": "Town Vigilante",
+        "faction": "Town",
+        "roledm": "You are a Vigilante.\nOnce per game, you may choose one player to kill.\nYou win when all threats to the town are dead."
+    },
+    {
+        "name": "Town Roleblocker",
+        "faction": "Town",
+        "roledm": "You are a Town Roleblocker.\nEach night, you may choose one person to visit. That person's night action, if applicable, will not occur. They will not be informed of such a visit.\nYou win when all threats to the town are dead."
+    },
+    {
+        "name": "Town Tracker",
+        "faction": "Town",
+        "roledm": "You are a Tracker.\nEach night, you may follow one person. You will be informed who they visit, if at all.\nYou win when all threats to the town are dead."
+    },
+    {
+        "name": "Town Watcher",
+        "faction": "Town",
+        "roledm": "You are a Watcher.\nEach night, you may watch one person. You will be informed who visits your target player.\nYou win when all threats to the town are dead."
+    },
+    {
+        "name": "Innocent Child",
+        "faction": "Town",
+        "roledm": "You are the Innocent Child.\nYour identity and role will be revealed at the start of the game.\nYou win when all threats to the town are dead."
+    },
+
+    {
+        "name": "Mafia Goon",
+        "faction": "Mafia",
+        "roledm": "You are a Mafia Goon.\nYou can communicate with Mafia-sided players during the night.\nEach night, you may choose a player to kill.\nYou win when the Mafia outnumber the Town."
+    },
+    {
+        "name": "Mafia Roleblocker",
+        "faction": "Mafia",
+        "roledm": "You are a Mafia Roleblocker.\nYou can communicate with Mafia-sided players during the night.\nEach night, you may choose a player to roleblock. That player's night action, if applicable, will not occur.\nYou win when the Mafia outnumber the Town."
+    },
+    {
+        "name": "Mafia Rolecop",
+        "faction": "Mafia",
+        "roledm": "You are a Mafia Rolecop.\nYou can communicate with Mafia-sided players during the night.\nEach night, you may choose a player to investigate. You will be informed of their role.\nYou win when the Mafia outnumber the Town."
+    }
+]
+
+
