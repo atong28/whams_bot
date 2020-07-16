@@ -1,6 +1,6 @@
 [
     {
-        "name": "Town",
+        "name": "Town Villager",
         "faction": "Town",
         "roledm": "You are a member of the Town.\nYou have no special powers.\nYou win when all threats to the town are dead."
     },
@@ -44,7 +44,7 @@
         "name": "Mafia Goon",
         "faction": "Mafia",
         "roledm": "You are a Mafia Goon.\nYou can communicate with Mafia-sided players during the night.\nEach night, you may choose a player to kill.\nYou win when the Mafia outnumber the Town."
-    },
+},
     {
         "name": "Mafia Roleblocker",
         "faction": "Mafia",

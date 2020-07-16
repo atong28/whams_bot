@@ -4,3 +4,5 @@ league/leagueconfig.json
 league/profiles.json
 currency/json/
 node_modules/
+mafia/game.json
+wham_game/json/counter.json
