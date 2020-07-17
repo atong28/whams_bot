@@ -17,9 +17,10 @@ module.exports = {
             collector.on('collect', m => {
                 collector.stop();
                 const lanes = m.content.split("|");
+                profiles[index].lanes = [];
                 for (i = 0; i < lanes.length; i++) {
                     const lane = lanes[i].replace(/ /g,'').toLowerCase();
-                    profiles[index].lanes = [];
+                    
                     switch (lane) {
                         case "top":
                             profiles[index].lanes.push("top");

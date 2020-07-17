@@ -62,6 +62,7 @@ module.exports = {
         let roleStr = "";
         for (i = 0; i < roles.length; i++)
         {
+            console.log(`roleStr added `+"(" + roleData[roles[i]].faction + ") " + roleData[roles[i]].name + "\n") // this works out
             roleStr += "(" + roleData[roles[i]].faction + ") " + roleData[roles[i]].name + "\n";
         }
         message.channel.send({embed: {
@@ -77,19 +78,17 @@ module.exports = {
             j = Math.floor(Math.random() * (i + 1));
             x = players[i];
             players[i] = players[j];
-            players[j] = x;
+            players[j] = x; 
         }
-        message.channel.send("Testing: Player List:");
-        for (i = 0; i < players.length; i++)
-        {
-            message.channel.send(players[i].displayName);
-        }
+        console.log(`Playerlist: `)
+        console.log(players);
 
         /**
          * Send roles
          */
         for (i = 0; i < players.length; i++)
         {
+            console.log(`Sending roles`);
             if (roleData[roles[i]].faction == "Mafia")
             {
                 players[i].send({embed: {
@@ -107,9 +106,8 @@ module.exports = {
                 }});
             }
         }
-
-        startgame(message, Discord, client, players, roles);
-        endgame();
+        const playGame = require(`./playgame.js`);
+        playGame.execute(message, Discord, client, players, roles);
         
     }
 }

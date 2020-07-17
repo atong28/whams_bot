@@ -17,6 +17,8 @@ module.exports = {
         const host = message.member;
         const MINIMUM_PLAYERS = 3;
         let ALLOW_ENTRY = true;
+        const ANNOUNCE_CHANNEL = message.guild.channels.cache.get("733421818110541932");
+
         /**
          * Create channel function
          * SetParent => set mafia category
@@ -100,7 +102,7 @@ module.exports = {
                 .setDescription(`React with ✅ to join.`)
                 .setColor(colors.RED);
 
-            message.channel.send(lobbyMsg).then(msg => {
+            ANNOUNCE_CHANNEL.send(lobbyMsg).then(msg => {
 
                 //create reaction collector
                 msg.react('✅');
@@ -185,10 +187,9 @@ module.exports = {
                 client.on('message', async message2 => {
                     if (message2.content.startsWith("m!")) {
                         const args = message2.content.split(/ +/);
-                        console.log(args);
                         if (args.length >= 1) {
                             if (args[0] == "m!start") {
-    
+                                console.log("Attempting Start");
                                 if (members.length < MINIMUM_PLAYERS) {
                                     message2.channel.send({embed: {
                                         description: `Error: not enough players to start the game.`

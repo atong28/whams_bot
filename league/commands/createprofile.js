@@ -20,7 +20,8 @@ module.exports = {
             league_username: league_user,
             league_alts: alts,
             lanes: [],
-            lfd: false
+            lfd: false,
+            free: false
         }
 
         console.log(profiles);

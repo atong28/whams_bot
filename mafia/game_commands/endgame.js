@@ -23,10 +23,5 @@ module.exports = {
 
         const channel = message.channel;
         channel.delete();
-        gameData.gameData[gameNum] = {};
-        fs.writeFile("mafia/game.json", JSON.stringify(gameData), err => { 
-            // Checking for errors 
-            if (err) throw err;  
-        }); 
     }
 }

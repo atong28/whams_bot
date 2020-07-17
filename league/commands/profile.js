@@ -1,3 +1,5 @@
+const { ReactionUserManager } = require("discord.js");
+
 module.exports = {
 	name: 'profile',
     description: 'Checks someone\'s league profile.',
@@ -16,12 +18,10 @@ module.exports = {
             user = message.member;
         } else if (args.length >= 1) {
 
-            try {
-                parseInt(args[0]);
-            } catch (error) {
+            if (isNaN(args[0])) {
                 message.channel.send({
                     embed: {
-                        description: `That's an improper usage of ${prefix}profile!\nUsage: w!profile <account number> <person>` 
+                        description: `That's an improper usage of ${prefix}profile!\nUsage: w!profile <account number> <person>\nAccount 1 is your main, and account 2 and onwards are your alts.` 
                     }
                 });
                 return;
@@ -72,10 +72,11 @@ module.exports = {
             if (acctNumber == 1) {
                 username = playerData.league_username;
             } else {
-                if (league_alts.length <= acctNumber - 2) {
+                if (playerData.league_alts.length <= acctNumber - 2) {
                     message.channel.send({embed:{
                         description: `The account number you entered was too high.`
                     }});
+                    return;
                 }
                 username = playerData.league_alts[acctNumber-2];
             }
@@ -175,6 +176,16 @@ module.exports = {
                 lanes = `Not set yet.`
             } else {
                 lanes = playerData.lanes.toString();
+            }
+
+            if (mastery1 + mastery2 + mastery3 == ``) {
+                mastery1 = `Could not load masteries.`
+            }
+            if (rankedSolo == ``) {
+                rankedSolo = `Could not load Ranked Solo/Duo Stats.`
+            }
+            if (rankedFlex == ``) {
+                rankedFlex = `Could not load Ranked Flex Stats.`
             }
             setTimeout(() => {
                 const regex = / /gi;
